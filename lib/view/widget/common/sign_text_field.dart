@@ -1,17 +1,15 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/view/widget/common/basic_text_field.dart';
 import 'package:flutter/material.dart';
 
 class SignTextField extends StatelessWidget {
-  const SignTextField(
-      {super.key,
-      required this.title,
-      required this.hintText,
-      required this.controller});
+  const SignTextField({
+    super.key,
+    required this.title,
+    required this.textField,
+  });
 
   final String title;
-  final String hintText;
-  final TextEditingController controller;
+  final Widget textField;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +24,7 @@ class SignTextField extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: DesignSystem.colors.gray700)),
           ),
-          BasicTextField(
-            hintText: hintText,
-            controller: controller,
-          ),
+          textField
         ],
       ),
     );

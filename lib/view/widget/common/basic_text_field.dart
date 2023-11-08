@@ -4,30 +4,38 @@ import 'package:flutter/material.dart';
 class BasicTextField extends StatelessWidget {
   const BasicTextField({
     super.key,
+    this.onChanged,
     this.controller,
     this.hintText,
     this.inputType,
     this.maxLength,
+    this.minLength,
     this.autoFocus = false,
     this.isPassword = false,
   });
 
+  final Function(String)? onChanged;
   final TextEditingController? controller;
   final TextInputType? inputType;
   final String? hintText;
   final int? maxLength;
+  final int? minLength;
   final bool autoFocus;
   final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       autofocus: autoFocus,
       obscureText: isPassword,
       maxLength: maxLength,
       keyboardType: inputType,
-      textAlign: isPassword ? TextAlign.center : TextAlign.start,
+      onChanged: (text) {
+        if (onChanged != null) {
+          onChanged!(text);
+        }
+      },
       style: DesignSystem.typography.heading3(),
       obscuringCharacter: '●',
       decoration: InputDecoration(

@@ -22,7 +22,7 @@ class BottomButton extends StatelessWidget {
           style: OutlinedButton.styleFrom(
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             minimumSize: const Size(0, 60),
             elevation: 0,

@@ -19,7 +19,11 @@ dependencies:
   get:
   firebase_core:
   firebase_database:
+  cloud_firestore:
   flutter_dotenv:
+  shared_preferences:
+  firebase_auth:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
@@ -33,3 +37,4 @@ flutter:
 
   assets:
     - assets/.env
+    - assets/images/
