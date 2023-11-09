@@ -37,8 +37,8 @@ class PrefsUtils {
   static Future<bool> clear() async => await _prefs.clear();
 
   static const String email = "EMAIL";
-  static const String password = "PASSWORD";
   static const String nickName = "NICKNAME";
-  static const String userId = "userid";
-  static const String darkMode = "darkmode";
+  static const String userId = "USERID";
+  static const String darkMode = "DARKMODE";
+  static const String refreshToken = "REGRESHTOKEN";
 }

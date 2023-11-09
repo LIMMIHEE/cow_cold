@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/data/repositories/authentication_repository.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
-import 'package:cow_cold/view/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,23 +12,22 @@ class SignUpController extends GetxController {
   final nickName = TextEditingController();
 
   bool? isNotDuplicate;
-  bool isDataEntered = false;
+  RxBool isDataEntered = false.obs;
   bool isDataFormatCondition = false;
 
   Future<void> registerUser() async {
     final result = await AuthenticationRepository.instance
         .createUserWithEmailAndPassword(email.text, password.text);
 
-    if (result != null) {
+    if (result != null && result.user != null) {
       Get.snackbar('회원가입 성공!', '소감기에 어서오세요!');
 
       await store.collection("user").doc().set(
         {"userId": email.text},
       );
-
-      PrefsUtils.setString(PrefsUtils.email, email.text);
-      PrefsUtils.setString(PrefsUtils.password, password.text);
-      PrefsUtils.setString(PrefsUtils.nickName, nickName.text);
+      await AuthenticationRepository.instance.updateUserName(nickName.text);
+      AuthenticationRepository.instance
+          .saveUserData(result.user!, nickName: nickName.text);
 
       Get.offAllNamed('/home');
     }
@@ -58,12 +55,10 @@ class SignUpController extends GetxController {
   }
 
   void dataEnteredCheck() {
-    if (email.text.isNotEmpty &&
+    isDataEntered.value = email.text.isNotEmpty &&
         password.text.isNotEmpty &&
-        nickName.text.isNotEmpty) {
-      isDataEntered = true;
-      update();
-    }
+        nickName.text.isNotEmpty;
+    update();
   }
 
   void dataFormatCheck() {
@@ -89,7 +84,7 @@ class SignUpController extends GetxController {
       isDataFormatCondition = false;
     }
 
-    if (isDataEntered && isDataFormatCondition) {
+    if (isDataEntered.value && isDataFormatCondition) {
       this.isDataFormatCondition = true;
     } else {
       this.isDataFormatCondition = false;

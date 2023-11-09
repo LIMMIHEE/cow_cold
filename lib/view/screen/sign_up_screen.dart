@@ -88,14 +88,14 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   BottomButton(
                       text: '회원가입',
-                      backgroundColor: controller.isDataEntered
+                      backgroundColor: controller.isDataEntered.value
                           ? DesignSystem.colors.appPrimary
                           : DesignSystem.colors.gray100,
                       textColor: DesignSystem.colors.white,
                       onTap: () {
                         controller.dataFormatCheck();
 
-                        if (controller.isDataEntered &&
+                        if (controller.isDataEntered.value &&
                             controller.isDataFormatCondition) {
                           controller.registerUser();
                         }
