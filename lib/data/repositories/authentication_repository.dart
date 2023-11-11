@@ -2,7 +2,7 @@ import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthenticationRepository extends GetxController {
+class AuthenticationRepository {
   static AuthenticationRepository get instance => AuthenticationRepository();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;

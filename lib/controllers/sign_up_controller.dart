@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cow_cold/data/models/user.dart';
+import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/repositories/authentication_repository.dart';
-import 'package:cow_cold/data/source/network/firebase_store.dart';
+import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
-  final store = FirebaseStore.instance.store;
+  final userRepository = UserRepository(userProvider: UserProvider());
 
   final email = TextEditingController();
   final password = TextEditingController();
@@ -22,9 +24,10 @@ class SignUpController extends GetxController {
     if (result != null && result.user != null) {
       Get.snackbar('회원가입 성공!', '소감기에 어서오세요!');
 
-      await store.collection("user").doc().set(
-        {"userId": email.text},
-      );
+      await userRepository.setUser(User(
+        id: email.text,
+        name: nickName.text,
+      ));
       await AuthenticationRepository.instance.updateUserName(nickName.text);
       AuthenticationRepository.instance
           .saveUserData(result.user!, nickName: nickName.text);
@@ -44,14 +47,10 @@ class SignUpController extends GetxController {
       return;
     }
 
-    QuerySnapshot query = await store
-        .collection("user")
-        .where("userId", isEqualTo: email.text)
-        .get();
-
-    isNotDuplicate = query.docs.isEmpty;
-    Get.snackbar(query.docs.isEmpty ? '사용 가능' : '사용 불가',
-        query.docs.isEmpty ? '사용 가능 이메일입니다' : '이미 가입된 이메일 입니다.');
+    final QuerySnapshot findUser = await userRepository.getUser(email.text);
+    isNotDuplicate = findUser.docs.isEmpty;
+    Get.snackbar(findUser.docs.isEmpty ? '사용 가능' : '사용 불가',
+        findUser.docs.isEmpty ? '사용 가능 이메일입니다' : '이미 가입된 이메일 입니다.');
   }
 
   void dataEnteredCheck() {
