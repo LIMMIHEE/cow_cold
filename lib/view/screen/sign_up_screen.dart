@@ -16,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
     return ScaffoldBody(
         appBar: basicAppBar('회원가입'),
         child: SafeArea(
-          child: GetBuilder<SignUpController>(
+          child: GetX<SignUpController>(
             init: SignUpController(),
             builder: (controller) {
               return Column(

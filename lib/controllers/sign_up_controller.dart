@@ -57,7 +57,6 @@ class SignUpController extends GetxController {
     isDataEntered.value = email.text.isNotEmpty &&
         password.text.isNotEmpty &&
         nickName.text.isNotEmpty;
-    update();
   }
 
   void dataFormatCheck() {

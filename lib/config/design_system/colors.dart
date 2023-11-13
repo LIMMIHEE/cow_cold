@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 abstract class _LightScheme {
   static const Color appPrimary = Color(0xFFBC9F7C);
   static const Color appSecondary = Color(0xFF6C6051);
+  static const Color appPrimary100 = Color(0x33BC9F7C);
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray100 = Color(0xFFE1E1E1);
@@ -20,6 +21,7 @@ abstract class _LightScheme {
 
 abstract class _DarkScheme {
   static const Color appPrimary = Color(0xFF6C6051);
+  static const Color appPrimary100 = Color(0x1ABC9F7C);
   static const Color appSecondary = Color(0xFFBC9F7C);
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
@@ -42,6 +44,9 @@ class Colors {
   static Colors get instance => _instance;
 
   Color get mainColor => const Color(0xFFBC9F7C);
+
+  Color get appPrimary100 =>
+      Get.isDarkMode ? _DarkScheme.appPrimary100 : _LightScheme.appPrimary100;
 
   Color get appPrimary =>
       Get.isDarkMode ? _DarkScheme.appPrimary : _LightScheme.appPrimary;

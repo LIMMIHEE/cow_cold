@@ -2,7 +2,8 @@ import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-PreferredSizeWidget basicAppBar(String title, {Function? onTap}) {
+PreferredSizeWidget basicAppBar(String title,
+    {Function? onTap, List<Widget>? actions}) {
   return AppBar(
     title: Text(
       title,
@@ -10,6 +11,7 @@ PreferredSizeWidget basicAppBar(String title, {Function? onTap}) {
     ),
     elevation: 0,
     backgroundColor: Colors.transparent,
+    actions: actions,
     leading: IconButton(
         onPressed: () {
           onTap == null ? Get.back() : onTap();

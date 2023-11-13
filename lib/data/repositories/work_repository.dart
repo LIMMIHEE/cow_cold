@@ -1,21 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class WorkRepository {
   final WorkProvider workProvider;
 
   WorkRepository({required this.workProvider});
 
-  Future<DatabaseReference> getWork(String inviteCode) async {
-    return workProvider.getWork(inviteCode);
+  Future<QuerySnapshot> getWork() async {
+    return await workProvider.getWork();
   }
 
-  Future<void> setWork(String workServerId, String inviteCode) async {
-    return workProvider.setWork(workServerId, inviteCode);
+  Future<Work> createWork(
+      String title, String category, String description) async {
+    return await workProvider.createWork(title, category, description);
   }
 
   Future<void> updateAllowedUsers(
       String workServerId, List<String> allowedUsers) async {
-    return workProvider.updateAllowedUsers(workServerId, allowedUsers);
+    return await workProvider.updateAllowedUsers(workServerId, allowedUsers);
   }
 }

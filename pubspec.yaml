@@ -24,6 +24,7 @@ dependencies:
   shared_preferences:
   firebase_auth:
   flutter_svg:
+  crypto:
 
 dev_dependencies:
   flutter_test:
