@@ -74,6 +74,14 @@ class WriteWorkScreen extends StatelessWidget {
                           controller: controller,
                           text: '시나리오',
                         ),
+                        CategoryRadio(
+                          controller: controller,
+                          child: Icon(
+                            Icons.add,
+                            color: DesignSystem.colors.textPrimary,
+                            size: 20,
+                          ),
+                        ),
                       ],
                     ),
                     const WriteFieldTitle(
@@ -81,8 +89,7 @@ class WriteWorkScreen extends StatelessWidget {
                     ),
                     Container(
                       constraints: const BoxConstraints(minHeight: 180),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 26),
+                      padding: const EdgeInsets.all(18),
                       decoration: ShapeDecoration(
                         color: DesignSystem.colors.appPrimary100,
                         shape: RoundedRectangleBorder(

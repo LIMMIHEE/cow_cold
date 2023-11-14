@@ -22,6 +22,7 @@ class DescriptionTextField extends StatelessWidget {
         border: InputBorder.none,
         hintText: hintText,
         counterText: '',
+        isDense: true,
         contentPadding: EdgeInsets.zero,
         hintStyle: DesignSystem.typography.body2(TextStyle(
           color: DesignSystem.colors.gray700,

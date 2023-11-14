@@ -25,6 +25,9 @@ dependencies:
   firebase_auth:
   flutter_svg:
   crypto:
+  intl:
+  flutter_localization:
+  dropdown_textfield:
 
 dev_dependencies:
   flutter_test:

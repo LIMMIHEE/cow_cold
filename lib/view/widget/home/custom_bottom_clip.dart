@@ -8,14 +8,13 @@ class CustomBottomClip extends CustomClipper<Path> {
 
     var path = Path();
     path.lineTo(size.width, 0);
-    path.lineTo(
-        size.width - (widthPercent * 10), size.height - (heightPercent * 30));
-    path.quadraticBezierTo(size.width - (widthPercent * 14),
-        heightPercent * 105, size.width - (widthPercent * 35), size.height);
+    path.lineTo(widthPercent * 90, heightPercent * 70);
+    path.quadraticBezierTo(
+        widthPercent * 86, heightPercent * 105, widthPercent * 65, size.height);
     path.lineTo(widthPercent * 38, size.height);
     path.quadraticBezierTo(widthPercent * 14, heightPercent * 105,
-        widthPercent * 10, size.height - (heightPercent * 30));
-    path.lineTo(widthPercent * 10, size.height - (heightPercent * 30));
+        widthPercent * 10, heightPercent * 70);
+    path.lineTo(widthPercent * 10, heightPercent * 70);
     path.lineTo(0, 0);
     path.close();
     return path;

@@ -1,6 +1,7 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/home_main_controller.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
+import 'package:cow_cold/view/widget/home/home_main_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -68,34 +69,7 @@ class HomeMainPage extends StatelessWidget {
                                     final work =
                                         controller.workList.elementAt(index);
 
-                                    return GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        padding: const EdgeInsets.all(12),
-                                        decoration: ShapeDecoration(
-                                          color: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: DesignSystem
-                                                    .colors.gray700),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          work.title,
-                                          maxLines: 4,
-                                          style: DesignSystem.typography.title3(
-                                              const TextStyle(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                    );
+                                    return HomeMainGridItem(work: work);
                                   },
                                 ),
                               ),
