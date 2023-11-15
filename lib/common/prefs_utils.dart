@@ -41,4 +41,5 @@ class PrefsUtils {
   static const String userId = "USERID";
   static const String darkMode = "DARKMODE";
   static const String refreshToken = "REGRESHTOKEN";
+  static const String customCategory = "CUSTOMCATEGORY";
 }

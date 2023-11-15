@@ -3,7 +3,8 @@ import 'package:cow_cold/controllers/write_work_controller.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
 import 'package:cow_cold/view/widget/common/basic_text_field.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
-import 'package:cow_cold/view/widget/write/category_radio.dart';
+import 'package:cow_cold/view/widget/common/text_field_bottom_sheet.dart';
+import 'package:cow_cold/view/widget/write/category_chip.dart';
 import 'package:cow_cold/view/widget/write/description_text_field.dart';
 import 'package:cow_cold/view/widget/write/write_field_title.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class WriteWorkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<WriteWorkController>(
+    return GetX<WriteWorkController>(
         init: WriteWorkController(),
         builder: (controller) {
           return ScaffoldBody(
@@ -60,28 +61,38 @@ class WriteWorkScreen extends StatelessWidget {
                     const WriteFieldTitle(
                       title: '카테고리',
                     ),
-                    Row(
+                    Wrap(
+                      spacing: 8,
+                      direction: Axis.horizontal,
                       children: [
-                        CategoryRadio(
-                          controller: controller,
-                          text: '웹소설',
-                        ),
-                        CategoryRadio(
-                          controller: controller,
-                          text: '소설',
-                        ),
-                        CategoryRadio(
-                          controller: controller,
-                          text: '시나리오',
-                        ),
-                        CategoryRadio(
-                          controller: controller,
+                        for (final category in controller.categoryList)
+                          CategoryChip(
+                            text: category,
+                            selectCategory: controller.category.value,
+                            onTap: (text) {
+                              controller.selectCategory(text);
+                            },
+                          ),
+                        CategoryChip(
+                          selectCategory: controller.category.value,
+                          onTap: (_) {
+                            Get.bottomSheet(
+                                TextFieldBottomSheet(
+                                  title: '카테고리',
+                                  hintText: '카테고리를 입력해주세요.',
+                                  buttonText: '추가',
+                                  onTap: (text) {
+                                    controller.addCategory(text);
+                                  },
+                                ),
+                                backgroundColor: DesignSystem.colors.white);
+                          },
                           child: Icon(
                             Icons.add,
                             color: DesignSystem.colors.textPrimary,
                             size: 20,
                           ),
-                        ),
+                        )
                       ],
                     ),
                     const WriteFieldTitle(

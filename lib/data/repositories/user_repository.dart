@@ -11,6 +11,10 @@ class UserRepository {
     return userProvider.setUser(user);
   }
 
+  Future<void> addCategory(String category) async {
+    return userProvider.addCategory(category);
+  }
+
   Future<QuerySnapshot> getUser(String email) async {
     return userProvider.getUser(email);
   }

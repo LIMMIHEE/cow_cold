@@ -14,7 +14,7 @@ class TextFieldBottomSheet extends StatelessWidget {
   final String title;
   final String hintText;
   final String buttonText;
-  final Function() onTap;
+  final Function(String) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class TextFieldBottomSheet extends StatelessWidget {
                 text: buttonText,
                 backgroundColor: DesignSystem.colors.appSecondary,
                 textColor: DesignSystem.colors.white,
-                onTap: () => onTap()),
+                onTap: () => onTap(controller.text)),
           )
         ],
       ),

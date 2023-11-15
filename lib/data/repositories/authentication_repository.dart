@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:cow_cold/data/models/user.dart' as UserProfile;
 import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/providers/user_provider.dart';
+import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -53,5 +58,14 @@ class AuthenticationRepository {
     if ((user.refreshToken ?? '').isNotEmpty) {
       PrefsUtils.setString(PrefsUtils.refreshToken, user.refreshToken!);
     }
+
+    UserRepository(userProvider: UserProvider())
+        .getUser(user.email ?? '')
+        .then((findUser) {
+      final convertUser = UserProfile.User.fromJson(
+          jsonDecode(jsonEncode(findUser.docs.first.data())));
+      PrefsUtils.setStringList(
+          PrefsUtils.customCategory, convertUser.customCategory);
+    });
   }
 }
