@@ -19,13 +19,15 @@ class WriteReportScreen extends StatelessWidget {
           return ScaffoldBody(
               appBar: basicAppBar('감상추가', actions: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.createReport();
+                    },
                     child: Text(
                       '완료',
                       style: DesignSystem.typography.body(),
                     ))
               ], onTap: () {
-                if (controller.description.text.isNotEmpty) {
+                if (controller.content.text.isNotEmpty) {
                   Get.defaultDialog(
                       title: '나가기',
                       content: const Padding(
@@ -68,7 +70,7 @@ class WriteReportScreen extends StatelessWidget {
                       ),
                     ),
                     DescriptionTextField(
-                        controller: controller.description,
+                        controller: controller.content,
                         hintText: '감상을 남겨주세요.',
                         maxLength: 1200),
                   ],
