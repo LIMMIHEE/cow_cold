@@ -18,6 +18,7 @@ class CustomFlagClip extends CustomClipper<Path> {
     path.lineTo(0, heightPercent * 55);
     path.lineTo(0, 0);
     path.close();
+
     return path;
   }
 

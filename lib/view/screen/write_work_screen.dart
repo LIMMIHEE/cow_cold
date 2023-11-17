@@ -4,7 +4,7 @@ import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
 import 'package:cow_cold/view/widget/common/basic_text_field.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/common/text_field_bottom_sheet.dart';
-import 'package:cow_cold/view/widget/write/category_chip.dart';
+import 'package:cow_cold/view/widget/common/chip_item.dart';
 import 'package:cow_cold/view/widget/write/description_text_field.dart';
 import 'package:cow_cold/view/widget/write/write_field_title.dart';
 import 'package:flutter/material.dart';
@@ -66,15 +66,15 @@ class WriteWorkScreen extends StatelessWidget {
                       direction: Axis.horizontal,
                       children: [
                         for (final category in controller.categoryList)
-                          CategoryChip(
+                          ChipItem(
                             text: category,
-                            selectCategory: controller.category.value,
+                            selectText: controller.category.value,
                             onTap: (text) {
                               controller.selectCategory(text);
                             },
                           ),
-                        CategoryChip(
-                          selectCategory: controller.category.value,
+                        ChipItem(
+                          selectText: controller.category.value,
                           onTap: (_) {
                             Get.bottomSheet(
                                 TextFieldBottomSheet(
