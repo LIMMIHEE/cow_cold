@@ -28,6 +28,7 @@ dependencies:
   intl:
   flutter_localization:
   dropdown_textfield:
+  flutter_staggered_grid_view:
 
 dev_dependencies:
   flutter_test:

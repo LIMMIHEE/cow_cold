@@ -2,6 +2,7 @@ import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeMainGridItem extends StatelessWidget {
   const HomeMainGridItem({
@@ -14,7 +15,9 @@ class HomeMainGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed('/work_detail', arguments: work);
+      },
       child: Wrap(
         children: [
           Container(

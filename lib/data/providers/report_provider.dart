@@ -12,10 +12,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class ReportProvider {
   final firebaseStore = FirebaseStore.instance;
 
-  Future<QuerySnapshot> getReports(String workId) async {
+  Future<QuerySnapshot> getUserReports() async {
     return await firebaseStore.store
         .collection("report")
-        .where("workServerId", isEqualTo: workId)
+        .where("createUserId",
+            isEqualTo: PrefsUtils.getString(PrefsUtils.userId))
         .get();
   }
 

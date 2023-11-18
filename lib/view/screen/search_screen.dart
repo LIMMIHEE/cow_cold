@@ -73,10 +73,7 @@ class SearchScreen extends StatelessWidget {
                                     final work =
                                         controller.resultList.elementAt(index);
 
-                                    return GestureDetector(
-                                      onTap: () {},
-                                      child: SearchListItem(work: work),
-                                    );
+                                    return SearchListItem(work: work);
                                   },
                                   separatorBuilder:
                                       (BuildContext context, int index) {

@@ -9,8 +9,8 @@ class ReportRepository {
 
   ReportRepository({required this.reportProvider});
 
-  Future<QuerySnapshot> getReports(String workId) async {
-    return await reportProvider.getReports(workId);
+  Future<QuerySnapshot> getUserReports() async {
+    return await reportProvider.getUserReports();
   }
 
   Future<Report> createReport(

@@ -9,6 +9,7 @@ abstract class _LightScheme {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray100 = Color(0xFFE1E1E1);
+  static const Color gray300 = Color(0xFFC7C7C7);
   static const Color gray500 = Color(0xFF8B8B8B);
   static const Color gray700 = Color(0xff9D9D9D);
   static const Color gray900 = Color(0xFFF3F3F3);
@@ -26,6 +27,7 @@ abstract class _DarkScheme {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray100 = Color(0xff9D9D9D);
+  static const Color gray300 = Color(0xFFC7C7C7);
   static const Color gray500 = Color(0xFF8B8B8B);
   static const Color gray700 = Color(0xff9D9D9D);
   static const Color gray900 = Color(0xFFE1E1E1);
@@ -57,6 +59,9 @@ class Colors {
   Color get black => Get.isDarkMode ? _DarkScheme.black : _LightScheme.black;
 
   Color get white => Get.isDarkMode ? _DarkScheme.white : _LightScheme.white;
+
+  Color get gray300 =>
+      Get.isDarkMode ? _DarkScheme.gray300 : _LightScheme.gray300;
 
   Color get gray700 =>
       Get.isDarkMode ? _DarkScheme.gray700 : _LightScheme.gray700;

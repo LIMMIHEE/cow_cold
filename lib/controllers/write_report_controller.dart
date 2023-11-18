@@ -1,4 +1,5 @@
 import 'package:cow_cold/controllers/home_main_controller.dart';
+import 'package:cow_cold/controllers/report_history_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
@@ -19,10 +20,14 @@ class WriteReportController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
+    final initialWork = Get.arguments as Work?;
     final List<DropDownValueModel> dropDownList = [];
     Get.find<HomeMainController>().workList.forEach((work) {
-      dropDownList.add(DropDownValueModel(name: work.title, value: work));
+      final dropDown = DropDownValueModel(name: work.title, value: work);
+      dropDownList.add(dropDown);
+      if (work == initialWork) {
+        workName.setDropDown(dropDown);
+      }
     });
     this.dropDownList.addAll(dropDownList);
   }
@@ -42,6 +47,7 @@ class WriteReportController extends GetxController {
     reportRepository
         .createReport(selectWork.serverId, selectWork.title, content.text)
         .then((report) {
+      Get.find<ReportHistoryController>().addReport(report);
       Get.back();
       Future.delayed(const Duration(milliseconds: 50), () {
         Get.snackbar('감상 추가 완료', '성공적으로 감상을 추가했습니다.');
