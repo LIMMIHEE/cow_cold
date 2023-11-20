@@ -4,7 +4,7 @@ import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/search/search_list_item.dart';
 import 'package:cow_cold/view/widget/search/search_text_field.dart';
 import 'package:cow_cold/controllers/search_controller.dart'
-    as GetSearchContoller;
+    as get_search_contoller;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +13,8 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<GetSearchContoller.SearchController>(
-      init: GetSearchContoller.SearchController(),
+    return GetX<get_search_contoller.SearchController>(
+      init: get_search_contoller.SearchController(),
       builder: (controller) {
         return ScaffoldBody(
             appBar: AppBar(

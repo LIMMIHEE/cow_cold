@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cow_cold/data/models/user.dart' as UserProfile;
+import 'package:cow_cold/data/models/user.dart' as user_profile;
 import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
@@ -62,7 +62,7 @@ class AuthenticationRepository {
     UserRepository(userProvider: UserProvider())
         .getUser(user.email ?? '')
         .then((findUser) {
-      final convertUser = UserProfile.User.fromJson(
+      final convertUser = user_profile.User.fromJson(
           jsonDecode(jsonEncode(findUser.docs.first.data())));
       PrefsUtils.setStringList(
           PrefsUtils.customCategory, convertUser.customCategory);

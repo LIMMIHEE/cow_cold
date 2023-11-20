@@ -1,7 +1,4 @@
-import 'package:cow_cold/config/app_routes.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/view/screen/sign_in_screen.dart';
-import 'package:cow_cold/view/screen/sign_up_screen.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:flutter/material.dart';

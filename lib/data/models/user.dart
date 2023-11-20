@@ -17,16 +17,14 @@ class User {
     if (json['customCategory'] != null) {
       customCategory = [];
       json['customCategory'].forEach((v) {
-        customCategory!.add(v);
+        customCategory.add(v);
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (customCategory != null) {
-      data['customCategory'] = customCategory;
-    }
+    data['customCategory'] = customCategory;
     data['id'] = id;
     data['name'] = name;
     data['serverId'] = serverId;

@@ -27,9 +27,7 @@ class ReportHistoryController extends GetxController {
   }
 
   List<Report> getWorkReport(String workId) {
-    return reportList.value
-        .where((report) => report.workServerId == workId)
-        .toList();
+    return reportList.where((report) => report.workServerId == workId).toList();
   }
 
   void addReport(Report newReport) {

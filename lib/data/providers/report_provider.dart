@@ -1,13 +1,7 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/data/models/report.dart';
-import 'package:cow_cold/data/models/work.dart';
-import 'package:cow_cold/data/source/network/firebase_database.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
-import 'package:crypto/crypto.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ReportProvider {
   final firebaseStore = FirebaseStore.instance;
