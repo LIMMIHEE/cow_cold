@@ -2,6 +2,7 @@ class Work {
   String serverId = '';
   String createUserId = '';
   String createUserName = '';
+  String updateDate = '';
   String title = '';
   String category = '';
   String description = '';
@@ -11,6 +12,7 @@ class Work {
     this.serverId = '',
     this.createUserId = '',
     this.createUserName = '',
+    this.updateDate = '',
     this.title = '',
     this.category = '',
     this.description = '',
@@ -32,6 +34,7 @@ class Work {
     data['serverId'] = serverId;
     data['createUserId'] = createUserId;
     data['createUserName'] = createUserName;
+    data['updateDate'] = updateDate;
     data['title'] = title;
     data['category'] = category;
     data['description'] = description;

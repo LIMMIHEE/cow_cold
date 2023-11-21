@@ -22,6 +22,7 @@ class HomeMainController extends GetxController {
       }
 
       isGetWorkData = true;
+      workList.sort((b, a) => a.updateDate.compareTo(b.updateDate));
       workList.addAll(getWorks);
     }).onError((error, stackTrace) {
       Get.snackbar('불러오기 실패', '데이터를 불러오는 도중 문제가 발생하였습니다.');

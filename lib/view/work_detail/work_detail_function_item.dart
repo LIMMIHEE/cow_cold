@@ -1,8 +1,8 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-class WorkDetailBottomSheetItem extends StatelessWidget {
-  const WorkDetailBottomSheetItem({
+class WorkDetailFunctionItem extends StatelessWidget {
+  const WorkDetailFunctionItem({
     super.key,
     required this.icon,
     required this.text,

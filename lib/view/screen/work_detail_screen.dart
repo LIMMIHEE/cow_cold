@@ -5,7 +5,7 @@ import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
 import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/work_detail/board_top_layout.dart';
-import 'package:cow_cold/view/work_detail/work_detail_bottom_sheet_item.dart';
+import 'package:cow_cold/view/work_detail/work_detail_function_item.dart';
 import 'package:cow_cold/view/work_detail/work_detail_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -25,12 +25,12 @@ class WorkDetailScreen extends GetView<ReportHistoryController> {
                 Get.bottomSheet(
                     Wrap(
                       children: [
-                        WorkDetailBottomSheetItem(
+                        WorkDetailFunctionItem(
                           icon: Icons.edit,
                           text: '수정',
                           onTap: () {},
                         ),
-                        WorkDetailBottomSheetItem(
+                        WorkDetailFunctionItem(
                           icon: Icons.share,
                           text: '공동 작성자 초대코드',
                           onTap: () {},
@@ -38,7 +38,7 @@ class WorkDetailScreen extends GetView<ReportHistoryController> {
                         const SizedBox(
                           height: 120,
                         ),
-                        WorkDetailBottomSheetItem(
+                        WorkDetailFunctionItem(
                           icon: Icons.delete,
                           text: '삭제',
                           isDeleteField: true,

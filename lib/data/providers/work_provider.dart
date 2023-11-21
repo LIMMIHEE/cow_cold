@@ -32,6 +32,7 @@ class WorkProvider {
         serverId: newWork.id,
         createUserId: PrefsUtils.getString(PrefsUtils.userId),
         createUserName: PrefsUtils.getString(PrefsUtils.nickName),
+        updateDate: DateTime.now().toString(),
         title: title,
         category: category,
         description: description,
