@@ -20,6 +20,7 @@ class ReportHistoryController extends GetxController {
         getReports.add(Report.fromJson(jsonDecode(jsonEncode(report.data()))));
       }
 
+      reportList.sort((b, a) => a.updateDate.compareTo(b.updateDate));
       reportList.addAll(getReports);
     }).onError((error, stackTrace) {
       Get.snackbar('불러오기 실패', '데이터를 불러오는 도중 문제가 발생하였습니다.');

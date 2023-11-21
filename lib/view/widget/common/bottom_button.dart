@@ -7,17 +7,21 @@ class BottomButton extends StatelessWidget {
       required this.text,
       required this.backgroundColor,
       required this.textColor,
-      required this.onTap});
+      required this.onTap,
+      this.paddingVisible = true});
 
   final String text;
   final Color backgroundColor;
   final Color textColor;
   final Function() onTap;
+  final bool paddingVisible;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+      padding: paddingVisible
+          ? const EdgeInsets.symmetric(horizontal: 32, vertical: 8)
+          : EdgeInsets.zero,
       child: OutlinedButton(
           style: OutlinedButton.styleFrom(
             backgroundColor: backgroundColor,
