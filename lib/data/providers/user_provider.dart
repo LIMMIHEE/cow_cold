@@ -9,21 +9,20 @@ class UserProvider {
   final FirebaseStore firebaseStore = FirebaseStore.instance;
 
   Future<void> setUser(User user) async {
-    final newUser = await firebaseStore.store.collection("user").doc();
-    user.serverId = newUser.id;
+    user.serverId = firebaseStore.store.collection("user").doc().id;
 
-    await newUser.set(user.toJson());
+    await firebaseStore.store
+        .collection("user")
+        .doc(user.serverId)
+        .set(user.toJson());
   }
 
   Future<void> addCategory(String category) async {
     final id = PrefsUtils.getString(PrefsUtils.email);
-    final QuerySnapshot user = await firebaseStore.store
-        .collection("user")
-        .where("id", isEqualTo: id)
-        .get();
+    final userQuery = await getUser(id);
 
     final convertUser =
-        User.fromJson(jsonDecode(jsonEncode(user.docs.first.data())));
+        User.fromJson(jsonDecode(jsonEncode(userQuery.docs.first.data())));
     convertUser.customCategory = [...convertUser.customCategory, category];
 
     await firebaseStore.store

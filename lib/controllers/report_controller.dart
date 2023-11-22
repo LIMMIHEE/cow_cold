@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/repositories/report_repository.dart';
@@ -12,19 +11,21 @@ class ReportController extends GetxController {
   RxList<Report> reportList = <Report>[].obs;
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-    _reportRepository.getUserReports().then((reports) {
-      final List<Report> getReports = [];
-      for (final report in reports.docs) {
-        getReports.add(Report.fromJson(jsonDecode(jsonEncode(report.data()))));
-      }
+    try {
+      final reports = await _reportRepository.getUserReports();
+      final getReports = reports.docs
+          .map((report) =>
+              Report.fromJson(jsonDecode(jsonEncode(report.data()))))
+          .toList();
 
-      reportList.sort((b, a) => a.updateDate.compareTo(b.updateDate));
-      reportList.addAll(getReports);
-    }).onError((error, stackTrace) {
+      reportList
+        ..sort((b, a) => a.updateDate.compareTo(b.updateDate))
+        ..addAll(getReports);
+    } catch (e) {
       Get.snackbar('불러오기 실패', '데이터를 불러오는 도중 문제가 발생하였습니다.');
-    });
+    }
   }
 
   List<Report> getWorkReport(String workId) {
@@ -35,13 +36,12 @@ class ReportController extends GetxController {
     reportList.add(newReport);
   }
 
-  void deleteReport(Report report) {
-    _reportRepository.deleteReport(report.serverId).then((_) {
-      reportList.remove(report);
-    });
+  Future<void> deleteReport(Report report) async {
+    await _reportRepository.deleteReport(report.serverId);
+    reportList.remove(report);
   }
 
-  void deleteReports(String workServerId) {
-    _reportRepository.deleteReports(workServerId);
+  Future<void> deleteReports(String workServerId) async {
+    await _reportRepository.deleteReports(workServerId);
   }
 }

@@ -14,33 +14,38 @@ class WorkController extends GetxController {
   RxList<Work> workList = <Work>[].obs;
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-    workRepository.getWork().then((works) {
-      final List<Work> getWorks = [];
-      for (final work in works.docs) {
-        getWorks.add(Work.fromJson(jsonDecode(jsonEncode(work.data()))));
-      }
+
+    try {
+      final works = await workRepository.getWork();
+      final getWorks = works.docs
+          .map(
+            (work) => Work.fromJson(jsonDecode(jsonEncode(work.data()))),
+          )
+          .toList();
 
       isGetWorkData = true;
-      workList.sort((b, a) => a.updateDate.compareTo(b.updateDate));
-      workList.addAll(getWorks);
-    }).onError((error, stackTrace) {
+      workList
+        ..sort((b, a) => a.updateDate.compareTo(b.updateDate))
+        ..addAll(getWorks);
+    } catch (error) {
       Get.snackbar('불러오기 실패', '데이터를 불러오는 도중 문제가 발생하였습니다.');
-    });
+    }
   }
 
   void addWork(Work newWork) {
     workList.add(newWork);
   }
 
-  void removeWork(Work deleteWork) {
-    workRepository.deleteWork(deleteWork.serverId).then((_) {
+  void removeWork(Work deleteWork) async {
+    try {
+      await workRepository.deleteWork(deleteWork.serverId);
       workList.remove(deleteWork);
       Get.find<ReportController>().deleteReports(deleteWork.serverId);
       Get.back();
-    }).onError((error, stackTrace) {
+    } catch (error) {
       Get.snackbar('삭제 실패', '삭제 중 문제가 발생하였습니다.');
-    });
+    }
   }
 }

@@ -18,19 +18,21 @@ class WriteReportController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    initializeDropDownList();
+  }
+
+  void initializeDropDownList() {
     final initialWork = Get.arguments as Work?;
-    final List<DropDownValueModel> dropDownList = [];
-    Get.find<WorkController>().workList.forEach((work) {
+    dropDownList = Get.find<WorkController>().workList.map((work) {
       final dropDown = DropDownValueModel(name: work.title, value: work);
-      dropDownList.add(dropDown);
       if (work == initialWork) {
         workName.setDropDown(dropDown);
       }
-    });
-    this.dropDownList.addAll(dropDownList);
+      return dropDown;
+    }).toList();
   }
 
-  void createReport() {
+  void createReport() async {
     if (workName.dropDownValue == null) {
       Get.snackbar('작품명 선택', '작품명을 선택해주세요!');
       return;
@@ -42,16 +44,16 @@ class WriteReportController extends GetxController {
     }
 
     final selectWork = workName.dropDownValue!.value as Work;
-    reportRepository
-        .createReport(selectWork.serverId, selectWork.title, content.text)
-        .then((report) {
+    try {
+      final report = await reportRepository.createReport(
+          selectWork.serverId, selectWork.title, content.text);
       Get.find<ReportController>().addReport(report);
       Get.back();
       Future.delayed(const Duration(milliseconds: 50), () {
         Get.snackbar('감상 추가 완료', '성공적으로 감상을 추가했습니다.');
       });
-    }).onError((error, stackTrace) {
+    } catch (error) {
       Get.snackbar('감상 추가 실패', '업로드 중 문제가 발생하였습니다.');
-    });
+    }
   }
 }

@@ -38,14 +38,14 @@ class WriteWorkController extends GetxController {
       return;
     }
 
-    workRepository
-        .createWork(title.text, category.value, description.text)
-        .then((Work newWork) {
+    try {
+      Work newWork = await workRepository.createWork(
+          title.text, category.value, description.text);
       Get.find<WorkController>().addWork(newWork);
       Get.back();
-    }).onError((error, stackTrace) {
+    } catch (error) {
       Get.snackbar('작품 추가 실패', '작품 업로드 중 문제가 발생하였습니다.');
-    });
+    }
   }
 
   Future<void> addCategory(String category) async {
@@ -58,18 +58,20 @@ class WriteWorkController extends GetxController {
       return;
     }
 
-    userRepository.addCategory(category).then((value) {
+    try {
+      await userRepository.addCategory(category);
+
       final newCategory = [...categoryList, category];
       PrefsUtils.setStringList(
           PrefsUtils.customCategory, [...customCategory, category]);
-      categoryList.value = newCategory;
+      categoryList.assignAll(newCategory);
       customCategory = newCategory;
 
       if (Get.isBottomSheetOpen ?? false) {
         Get.back();
       }
-    }).onError((error, stackTrace) {
+    } catch (error) {
       Get.snackbar('카테고리 추가 실패', '카테고리 업로드 중 문제가 발생하였습니다.');
-    });
+    }
   }
 }

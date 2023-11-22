@@ -7,16 +7,16 @@ class ReportProvider {
   final firebaseStore = FirebaseStore.instance;
 
   Future<QuerySnapshot> getUserReports() async {
+    final userId = PrefsUtils.getString(PrefsUtils.userId);
     return await firebaseStore.store
         .collection("report")
-        .where("createUserId",
-            isEqualTo: PrefsUtils.getString(PrefsUtils.userId))
+        .where("createUserId", isEqualTo: userId)
         .get();
   }
 
   Future<Report> createReport(
       String workServerId, String title, String content) async {
-    final newReport = await firebaseStore.store.collection("report").doc();
+    final newReport = firebaseStore.store.collection("report").doc();
 
     final report = Report(
         serverId: newReport.id,
@@ -32,24 +32,28 @@ class ReportProvider {
   }
 
   Future<void> deleteReport(String serverId) async {
-    return await firebaseStore.store
-        .collection("report")
-        .doc(serverId)
-        .delete();
+    await firebaseStore.store.collection("report").doc(serverId).delete();
   }
 
   Future<void> deleteReports(String workServerId) async {
-    final QuerySnapshot deleteReport = await firebaseStore.store
-        .collection("report")
-        .where("workServerId", isEqualTo: workServerId)
-        .get();
+    try {
+      final QuerySnapshot deleteReport = await firebaseStore.store
+          .collection("report")
+          .where("workServerId", isEqualTo: workServerId)
+          .get();
 
-    for (var report in deleteReport.docs) {
-      try {
-        firebaseStore.store.collection("report").doc(report.id).delete();
-      } catch (e) {
-        rethrow;
-      }
+      await Future.wait(
+        deleteReport.docs.map((report) async {
+          if (report.exists) {
+            await firebaseStore.store
+                .collection("report")
+                .doc(report.id)
+                .delete();
+          }
+        }),
+      );
+    } catch (e) {
+      rethrow;
     }
   }
 }

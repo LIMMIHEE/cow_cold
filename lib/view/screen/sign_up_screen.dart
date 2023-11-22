@@ -38,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
                                   hintText: '아이디 입력 (이메일)',
                                   controller: controller.email,
                                   onChanged: (_) =>
-                                      controller.dataEnteredCheck(),
+                                      controller.isDataEnteredCheck(),
                                 ),
                               )),
                               GestureDetector(
@@ -71,7 +71,7 @@ class SignUpScreen extends StatelessWidget {
                               hintText: '비밀번호 입력',
                               controller: controller.password,
                               isPassword: true,
-                              onChanged: (_) => controller.dataEnteredCheck(),
+                              onChanged: (_) => controller.isDataEnteredCheck(),
                             ),
                           ),
                           SignTextField(
@@ -79,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
                             textField: BasicTextField(
                               hintText: '별명 입력',
                               controller: controller.nickName,
-                              onChanged: (_) => controller.dataEnteredCheck(),
+                              onChanged: (_) => controller.isDataEnteredCheck(),
                             ),
                           ),
                         ],
