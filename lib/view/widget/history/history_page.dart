@@ -1,4 +1,4 @@
-import 'package:cow_cold/controllers/report_history_controller.dart';
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/view/widget/common/app_logo.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/history/history_grid_item.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-class HistoryPage extends GetView<ReportHistoryController> {
+class HistoryPage extends GetView<ReportController> {
   const HistoryPage({super.key});
 
   @override

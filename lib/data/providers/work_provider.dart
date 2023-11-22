@@ -43,6 +43,10 @@ class WorkProvider {
     return work;
   }
 
+  Future<void> deleteWork(String serverId) async {
+    return await firebaseStore.store.collection("work").doc(serverId).delete();
+  }
+
   Future<void> setInviteCodeWork(String workServerId, String inviteCode) async {
     return await dataBase
         .ref('work')

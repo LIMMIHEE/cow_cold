@@ -1,6 +1,6 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/controllers/home_main_controller.dart';
-import 'package:cow_cold/controllers/report_history_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/view/home_main/home_main_page.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/home/bottom_tab_item.dart';
@@ -28,11 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Get.put<HomeMainController>(
-      HomeMainController(),
+    Get.put<WorkController>(
+      WorkController(),
     );
-    Get.put<ReportHistoryController>(
-      ReportHistoryController(),
+    Get.put<ReportController>(
+      ReportController(),
     );
   }
 

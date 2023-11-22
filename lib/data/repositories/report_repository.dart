@@ -15,4 +15,12 @@ class ReportRepository {
       String workServerId, String title, String content) async {
     return await reportProvider.createReport(workServerId, title, content);
   }
+
+  Future<void> deleteReport(String serverId) async {
+    return await reportProvider.deleteReport(serverId);
+  }
+
+  Future<void> deleteReports(String workServerId) async {
+    return await reportProvider.deleteReports(workServerId);
+  }
 }

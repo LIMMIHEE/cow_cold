@@ -5,7 +5,7 @@ import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/repositories/report_repository.dart';
 import 'package:get/get.dart';
 
-class ReportHistoryController extends GetxController {
+class ReportController extends GetxController {
   final ReportRepository _reportRepository =
       ReportRepository(reportProvider: ReportProvider());
 
@@ -33,5 +33,15 @@ class ReportHistoryController extends GetxController {
 
   void addReport(Report newReport) {
     reportList.add(newReport);
+  }
+
+  void deleteReport(Report report) {
+    _reportRepository.deleteReport(report.serverId).then((_) {
+      reportList.remove(report);
+    });
+  }
+
+  void deleteReports(String workServerId) {
+    _reportRepository.deleteReports(workServerId);
   }
 }

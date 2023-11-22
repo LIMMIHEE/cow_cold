@@ -1,4 +1,4 @@
-import 'package:cow_cold/controllers/home_main_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,7 @@ class SearchController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    workList = Get.find<HomeMainController>().workList;
+    workList = Get.find<WorkController>().workList;
   }
 
   void selectFilter(String text) {

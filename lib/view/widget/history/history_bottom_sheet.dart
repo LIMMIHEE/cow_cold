@@ -1,5 +1,5 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/controllers/home_main_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class HistoryBottomSheet extends StatelessWidget {
               backgroundColor: DesignSystem.colors.appPrimary,
               textColor: DesignSystem.colors.white,
               onTap: () {
-                final work = Get.find<HomeMainController>()
+                final work = Get.find<WorkController>()
                     .workList
                     .where((work) => work.serverId == report.workServerId)
                     .first;

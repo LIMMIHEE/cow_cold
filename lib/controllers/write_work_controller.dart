@@ -1,5 +1,5 @@
 import 'package:cow_cold/common/prefs_utils.dart';
-import 'package:cow_cold/controllers/home_main_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
@@ -41,7 +41,7 @@ class WriteWorkController extends GetxController {
     workRepository
         .createWork(title.text, category.value, description.text)
         .then((Work newWork) {
-      Get.find<HomeMainController>().addWork(newWork);
+      Get.find<WorkController>().addWork(newWork);
       Get.back();
     }).onError((error, stackTrace) {
       Get.snackbar('작품 추가 실패', '작품 업로드 중 문제가 발생하였습니다.');

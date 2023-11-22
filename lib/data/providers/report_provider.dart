@@ -30,4 +30,26 @@ class ReportProvider {
     await newReport.set(report.toJson());
     return report;
   }
+
+  Future<void> deleteReport(String serverId) async {
+    return await firebaseStore.store
+        .collection("report")
+        .doc(serverId)
+        .delete();
+  }
+
+  Future<void> deleteReports(String workServerId) async {
+    final QuerySnapshot deleteReport = await firebaseStore.store
+        .collection("report")
+        .where("workServerId", isEqualTo: workServerId)
+        .get();
+
+    for (var report in deleteReport.docs) {
+      try {
+        firebaseStore.store.collection("report").doc(report.id).delete();
+      } catch (e) {
+        rethrow;
+      }
+    }
+  }
 }

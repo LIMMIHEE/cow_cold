@@ -1,12 +1,12 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/controllers/home_main_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/view/widget/common/app_logo.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/home_main/home_main_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeMainPage extends GetView<HomeMainController> {
+class HomeMainPage extends GetView<WorkController> {
   const HomeMainPage({super.key});
 
   @override

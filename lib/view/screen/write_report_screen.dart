@@ -1,3 +1,4 @@
+import 'package:cow_cold/common/utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/write_report_controller.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
@@ -28,20 +29,10 @@ class WriteReportScreen extends StatelessWidget {
                     ))
               ], onTap: () {
                 if (controller.content.text.isNotEmpty) {
-                  Get.defaultDialog(
-                      title: '나가기',
-                      content: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 50),
-                        child: Text('화면을 나가시겠습니까?\n작성중인 내용은 사라집니다.'),
-                      ),
-                      textConfirm: '취소',
-                      confirmTextColor: Colors.white,
-                      onConfirm: Get.back,
-                      textCancel: '확인',
-                      onCancel: Get.back,
-                      titlePadding: const EdgeInsets.symmetric(vertical: 12),
-                      cancelTextColor: DesignSystem.colors.appPrimary,
-                      buttonColor: DesignSystem.colors.appPrimary);
+                  Utils.utils.defaultDialog(
+                    '나가기',
+                    '화면을 나가시겠습니까?\n작성중인 내용은 사라집니다.',
+                  );
                 } else {
                   Get.back();
                 }

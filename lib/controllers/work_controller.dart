@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
 import 'package:cow_cold/data/repositories/work_repository.dart';
 import 'package:get/get.dart';
 
-class HomeMainController extends GetxController {
+class WorkController extends GetxController {
   final WorkRepository workRepository =
       WorkRepository(workProvider: WorkProvider());
 
@@ -31,5 +32,15 @@ class HomeMainController extends GetxController {
 
   void addWork(Work newWork) {
     workList.add(newWork);
+  }
+
+  void removeWork(Work deleteWork) {
+    workRepository.deleteWork(deleteWork.serverId).then((_) {
+      workList.remove(deleteWork);
+      Get.find<ReportController>().deleteReports(deleteWork.serverId);
+      Get.back();
+    }).onError((error, stackTrace) {
+      Get.snackbar('삭제 실패', '삭제 중 문제가 발생하였습니다.');
+    });
   }
 }

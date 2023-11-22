@@ -1,5 +1,7 @@
+import 'package:cow_cold/common/utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/controllers/report_history_controller.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
 import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
@@ -11,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-class WorkDetailScreen extends GetView<ReportHistoryController> {
+class WorkDetailScreen extends GetView<ReportController> {
   const WorkDetailScreen({super.key});
 
   @override
@@ -42,7 +44,17 @@ class WorkDetailScreen extends GetView<ReportHistoryController> {
                           icon: Icons.delete,
                           text: '삭제',
                           isDeleteField: true,
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                            Utils.utils.defaultDialog(
+                              '작품 삭제하기',
+                              '작품을 삭제하시겠습니까?\n감상 내역들이 함께 사라집니다.',
+                              onCancel: () {
+                                Get.back();
+                                Get.find<WorkController>().removeWork(work);
+                              },
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 80,

@@ -20,4 +20,8 @@ class WorkRepository {
       String workServerId, List<String> allowedUsers) async {
     return await workProvider.updateAllowedUsers(workServerId, allowedUsers);
   }
+
+  Future<void> deleteWork(String serverId) async {
+    return await workProvider.deleteWork(serverId);
+  }
 }

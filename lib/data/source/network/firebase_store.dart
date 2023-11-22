@@ -4,5 +4,5 @@ class FirebaseStore {
   static final FirebaseStore instance = FirebaseStore();
 
   final FirebaseFirestore _store = FirebaseFirestore.instance;
-  get store => _store;
+  FirebaseFirestore get store => _store;
 }

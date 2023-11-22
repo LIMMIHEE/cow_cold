@@ -23,6 +23,7 @@ class Work {
     serverId = json['serverId'];
     createUserId = json['createUserId'];
     createUserName = json['createUserName'];
+    updateDate = json['updateDate'] ?? DateTime.now().toString();
     title = json['title'];
     category = json['category'];
     description = json['description'];
