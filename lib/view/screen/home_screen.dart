@@ -6,6 +6,7 @@ import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/home/bottom_tab_item.dart';
 import 'package:cow_cold/view/widget/history/history_page.dart';
 import 'package:cow_cold/view/widget/home/write_pop_menu_item.dart';
+import 'package:cow_cold/view/widget/setting/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   static List<Widget> pages = [
     const HomeMainPage(),
     const HistoryPage(),
-    Container(),
+    const SettingPage(),
   ];
 
   @override

@@ -9,6 +9,7 @@ import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/work_detail/board_top_layout.dart';
 import 'package:cow_cold/view/work_detail/work_detail_function_item.dart';
 import 'package:cow_cold/view/work_detail/work_detail_grid_item.dart';
+import 'package:cow_cold/view/work_detail/work_detail_invited_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,11 @@ class WorkDetailScreen extends GetView<ReportController> {
                         WorkDetailFunctionItem(
                           icon: Icons.share,
                           text: '공동 작성자 초대코드',
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                            Get.dialog(WorkDetailInvitedDialog(
+                                inviteCode: work.inviteCode));
+                          },
                         ),
                         const SizedBox(
                           height: 120,
@@ -77,7 +82,7 @@ class WorkDetailScreen extends GetView<ReportController> {
                 height: 30,
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Text(

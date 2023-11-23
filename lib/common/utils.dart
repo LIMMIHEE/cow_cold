@@ -11,7 +11,10 @@ class Utils {
         title: title,
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 50),
-          child: Text(subText),
+          child: Text(
+            subText,
+            textAlign: TextAlign.center,
+          ),
         ),
         textConfirm: '취소',
         confirmTextColor: Colors.white,
@@ -20,6 +23,7 @@ class Utils {
         onCancel: onCancel ?? Get.back,
         titlePadding: const EdgeInsets.symmetric(vertical: 12),
         cancelTextColor: DesignSystem.colors.appPrimary,
+        radius: 16,
         buttonColor: DesignSystem.colors.appPrimary);
   }
 }
