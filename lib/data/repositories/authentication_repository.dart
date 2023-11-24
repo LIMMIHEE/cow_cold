@@ -59,13 +59,13 @@ class AuthenticationRepository {
       PrefsUtils.setString(PrefsUtils.refreshToken, user.refreshToken!);
     }
 
-    UserRepository(userProvider: UserProvider())
-        .getUser(user.email ?? '')
-        .then((findUser) {
+    final userRepository = UserRepository.userRepository;
+    userRepository.getUser(user.email ?? '').then((findUser) {
       final convertUser = user_profile.User.fromJson(
           jsonDecode(jsonEncode(findUser.docs.first.data())));
       PrefsUtils.setStringList(
           PrefsUtils.customCategory, convertUser.customCategory);
+      PrefsUtils.setStringList(PrefsUtils.inviteWork, convertUser.inviteWorks);
     });
   }
 }

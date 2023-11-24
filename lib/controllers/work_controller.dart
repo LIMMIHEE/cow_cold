@@ -1,14 +1,17 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
+import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:cow_cold/data/repositories/work_repository.dart';
 import 'package:get/get.dart';
 
 class WorkController extends GetxController {
   final WorkRepository workRepository =
       WorkRepository(workProvider: WorkProvider());
+  final userRepository = UserRepository.userRepository;
 
   bool isGetWorkData = false;
   RxList<Work> workList = <Work>[].obs;
@@ -18,8 +21,9 @@ class WorkController extends GetxController {
     super.onReady();
 
     try {
-      final works = await workRepository.getWork();
-      final getWorks = works.docs
+      final works = await workRepository.getWorks();
+      final inviteWorks = await workRepository.getInviteWork();
+      final getWorks = [...works.docs, ...inviteWorks.docs]
           .map(
             (work) => Work.fromJson(jsonDecode(jsonEncode(work.data()))),
           )
@@ -40,12 +44,35 @@ class WorkController extends GetxController {
 
   void removeWork(Work deleteWork) async {
     try {
-      await workRepository.deleteWork(deleteWork.serverId);
+      await workRepository.deleteWork(
+          deleteWork.serverId, deleteWork.inviteCode);
       workList.remove(deleteWork);
       Get.find<ReportController>().deleteReports(deleteWork.serverId);
       Get.back();
     } catch (error) {
       Get.snackbar('삭제 실패', '삭제 중 문제가 발생하였습니다.');
+    }
+  }
+
+  Future<void> addInvitedWork(String inviteCode) async {
+    final QuerySnapshot getWork =
+        await workRepository.getWorkInviteCode(inviteCode);
+
+    if (getWork.docs.isNotEmpty) {
+      final convertWork =
+          Work.fromJson(jsonDecode(jsonEncode(getWork.docs.first.data())));
+      addWork(convertWork);
+    }
+  }
+
+  void submitInviteCode(String inviteCode) async {
+    try {
+      await workRepository.submitInviteCode(inviteCode);
+      await userRepository.addInviteWork(inviteCode);
+      await addInvitedWork(inviteCode);
+      Get.snackbar('추가 완료', '성공적으로 추가되었습니다!');
+    } catch (error) {
+      Get.snackbar('작품 추가 실패', '추가 중 문제가 발생하였습니다.');
     }
   }
 }

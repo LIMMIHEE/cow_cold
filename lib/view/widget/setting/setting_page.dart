@@ -1,5 +1,6 @@
 import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
+import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/common/text_field_bottom_sheet.dart';
 import 'package:cow_cold/view/widget/setting/setting_row.dart';
@@ -38,7 +39,10 @@ class SettingPage extends StatelessWidget {
                     title: '초대코드',
                     hintText: '초대코드를 입력해주세요.',
                     buttonText: '확인',
-                    onTap: (text) {},
+                    onTap: (text) {
+                      Get.back();
+                      Get.find<WorkController>().submitInviteCode(text);
+                    },
                   ),
                   backgroundColor: DesignSystem.colors.white);
             },

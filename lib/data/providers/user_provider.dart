@@ -18,17 +18,33 @@ class UserProvider {
   }
 
   Future<void> addCategory(String category) async {
+    final user = await _getUserAndUpdate((user) {
+      user.customCategory = [...user.customCategory, category];
+    });
+
+    await _updateUser(user);
+  }
+
+  Future<void> addInviteWork(String inviteCode) async {
+    final user = await _getUserAndUpdate((user) {
+      user.inviteWorks = [...user.inviteWorks, inviteCode];
+    });
+
+    final inviteWorks = PrefsUtils.getStringList(PrefsUtils.inviteWork);
+    PrefsUtils.setStringList(
+        PrefsUtils.inviteWork, [...inviteWorks, inviteCode]);
+
+    await _updateUser(user);
+  }
+
+  Future<User> _getUserAndUpdate(void Function(User) updateLogic) async {
     final id = PrefsUtils.getString(PrefsUtils.email);
     final userQuery = await getUser(id);
 
-    final convertUser =
-        User.fromJson(jsonDecode(jsonEncode(userQuery.docs.first.data())));
-    convertUser.customCategory = [...convertUser.customCategory, category];
+    final user = convertUser(userQuery);
+    updateLogic(user);
 
-    await firebaseStore.store
-        .collection("user")
-        .doc(convertUser.serverId)
-        .update(convertUser.toJson());
+    return user;
   }
 
   Future<QuerySnapshot> getUser(String email) async {
@@ -36,5 +52,16 @@ class UserProvider {
         .collection("user")
         .where("id", isEqualTo: email)
         .get();
+  }
+
+  User convertUser(QuerySnapshot userQuery) {
+    return User.fromJson(jsonDecode(jsonEncode(userQuery.docs.first.data())));
+  }
+
+  Future<void> _updateUser(User user) async {
+    await firebaseStore.store
+        .collection("user")
+        .doc(user.serverId)
+        .update(user.toJson());
   }
 }

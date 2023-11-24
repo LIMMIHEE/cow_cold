@@ -1,7 +1,6 @@
 import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
-import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
 import 'package:cow_cold/data/repositories/work_repository.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +11,7 @@ import '../data/repositories/user_repository.dart';
 class WriteWorkController extends GetxController {
   final WorkRepository workRepository =
       WorkRepository(workProvider: WorkProvider());
-  final UserRepository userRepository =
-      UserRepository(userProvider: UserProvider());
+  final userRepository = UserRepository.userRepository;
 
   final title = TextEditingController();
   final description = TextEditingController();

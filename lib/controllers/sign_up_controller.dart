@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/data/models/user.dart' as user;
-import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/repositories/authentication_repository.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
-  final userRepository = UserRepository(userProvider: UserProvider());
+  final userRepository = UserRepository.userRepository;
 
   final email = TextEditingController();
   final password = TextEditingController();
