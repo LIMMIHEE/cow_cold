@@ -26,11 +26,11 @@ class HistoryPage extends GetView<ReportController> {
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 20,
                 shrinkWrap: true,
-                itemCount: controller.reportList.length,
+                itemCount: controller.myReports.length,
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  final report = controller.reportList.elementAt(index);
+                  final report = controller.myReports.elementAt(index);
 
                   return HistoryGridItem(report: report);
                 },

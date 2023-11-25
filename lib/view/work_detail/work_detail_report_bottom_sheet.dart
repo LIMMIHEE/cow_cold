@@ -12,9 +12,11 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
   const WorkDetailReportBottomSheet({
     super.key,
     required this.report,
+    required this.isMyReport,
   });
 
   final Report report;
+  final bool isMyReport;
 
   @override
   Widget build(BuildContext context) {
@@ -52,44 +54,48 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-              children: [
-                Expanded(
-                    child: BottomButton(
-                        text: '감상 삭제',
-                        backgroundColor: DesignSystem.colors.deleteRed,
-                        textColor: DesignSystem.colors.white,
-                        onTap: () {
-                          if (report.createUserId !=
-                              PrefsUtils.getString(PrefsUtils.userId)) {
-                            Get.snackbar('삭제 불가', '내가 작성한 감상이 아닙니다.');
-                            return;
-                          }
+          Visibility(
+            visible: isMyReport,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: BottomButton(
+                          text: '감상 삭제',
+                          backgroundColor: DesignSystem.colors.deleteRed,
+                          textColor: DesignSystem.colors.white,
+                          onTap: () {
+                            if (report.createUserId !=
+                                PrefsUtils.getString(PrefsUtils.userId)) {
+                              Get.snackbar('삭제 불가', '내가 작성한 감상이 아닙니다.');
+                              return;
+                            }
 
-                          Get.back();
-                          Utils.utils.defaultDialog(
-                            '감상 삭제하기',
-                            '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
-                            onCancel: () {
-                              Get.back();
-                              Get.find<ReportController>().deleteReport(report);
-                            },
-                          );
-                        },
-                        paddingVisible: false)),
-                const SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                    child: BottomButton(
-                        text: '감상 수정',
-                        backgroundColor: DesignSystem.colors.appSecondary,
-                        textColor: DesignSystem.colors.white,
-                        onTap: () {},
-                        paddingVisible: false)),
-              ],
+                            Get.back();
+                            Utils.utils.defaultDialog(
+                              '감상 삭제하기',
+                              '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
+                              onCancel: () {
+                                Get.back();
+                                Get.find<ReportController>()
+                                    .deleteReport(report);
+                              },
+                            );
+                          },
+                          paddingVisible: false)),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                      child: BottomButton(
+                          text: '감상 수정',
+                          backgroundColor: DesignSystem.colors.appSecondary,
+                          textColor: DesignSystem.colors.white,
+                          onTap: () {},
+                          paddingVisible: false)),
+                ],
+              ),
             ),
           )
         ],

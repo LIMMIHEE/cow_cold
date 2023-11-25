@@ -19,60 +19,65 @@ class WorkDetailScreen extends GetView<ReportController> {
 
   @override
   Widget build(BuildContext context) {
-    final work = Get.arguments as Work;
+    final work = Get.arguments["work"] as Work;
+    final isMyWork = Get.arguments["isMyWork"] as bool;
 
     return ScaffoldBody(
-        appBar: basicAppBar('작품상세', actions: [
-          IconButton(
-              onPressed: () {
-                Get.bottomSheet(
-                    Wrap(
-                      children: [
-                        WorkDetailFunctionItem(
-                          icon: Icons.edit,
-                          text: '수정',
-                          onTap: () {},
-                        ),
-                        WorkDetailFunctionItem(
-                          icon: Icons.share,
-                          text: '공동 작성자 초대코드',
-                          onTap: () {
-                            Get.back();
-                            Get.dialog(WorkDetailInvitedDialog(
-                                inviteCode: work.inviteCode));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 120,
-                        ),
-                        WorkDetailFunctionItem(
-                          icon: Icons.delete,
-                          text: '삭제',
-                          isDeleteField: true,
-                          onTap: () {
-                            Get.back();
-                            Utils.utils.defaultDialog(
-                              '작품 삭제하기',
-                              '작품을 삭제하시겠습니까?\n감상 내역들이 함께 사라집니다.',
-                              onCancel: () {
-                                Get.back();
-                                Get.find<WorkController>().removeWork(work);
-                              },
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 80,
-                        ),
-                      ],
-                    ),
-                    backgroundColor: DesignSystem.colors.white);
-              },
-              icon: Icon(
-                Icons.more_vert,
-                color: DesignSystem.colors.black,
-              ))
-        ]),
+        appBar: basicAppBar('작품상세',
+            actions: isMyWork
+                ? [
+                    IconButton(
+                        onPressed: () {
+                          Get.bottomSheet(
+                              Wrap(
+                                children: [
+                                  WorkDetailFunctionItem(
+                                    icon: Icons.edit,
+                                    text: '수정',
+                                    onTap: () {},
+                                  ),
+                                  WorkDetailFunctionItem(
+                                    icon: Icons.share,
+                                    text: '공동 작성자 초대코드',
+                                    onTap: () {
+                                      Get.back();
+                                      Get.dialog(WorkDetailInvitedDialog(
+                                          inviteCode: work.inviteCode));
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 120,
+                                  ),
+                                  WorkDetailFunctionItem(
+                                    icon: Icons.delete,
+                                    text: '삭제',
+                                    isDeleteField: true,
+                                    onTap: () {
+                                      Get.back();
+                                      Utils.utils.defaultDialog(
+                                        '작품 삭제하기',
+                                        '작품을 삭제하시겠습니까?\n감상 내역들이 함께 사라집니다.',
+                                        onCancel: () {
+                                          Get.back();
+                                          Get.find<WorkController>()
+                                              .removeWork(work);
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 80,
+                                  ),
+                                ],
+                              ),
+                              backgroundColor: DesignSystem.colors.white);
+                        },
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: DesignSystem.colors.black,
+                        ))
+                  ]
+                : null),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
@@ -126,14 +131,15 @@ class WorkDetailScreen extends GetView<ReportController> {
               ),
               const BoardTopLayout(),
               Expanded(child: Obx(() {
-                final workReport = controller.getWorkReport(work.serverId);
+                final reports = [
+                  ...controller.getWorkReport(work.serverId),
+                  ...controller.getInviteWorkReport(work.serverId) ?? []
+                ];
                 return Stack(
                   children: [
                     Container(
-                      height: workReport.length > 3
-                          ? (workReport.length > 5
-                              ? 400
-                              : workReport.length * 50)
+                      height: reports.length > 3
+                          ? (reports.length > 5 ? 400 : reports.length * 50)
                           : 0,
                       color: DesignSystem.colors.appPrimary,
                     ),
@@ -179,11 +185,11 @@ class WorkDetailScreen extends GetView<ReportController> {
                               mainAxisSpacing: 8,
                               crossAxisSpacing: 8,
                               shrinkWrap: true,
-                              itemCount: workReport.length,
+                              itemCount: reports.length,
                               padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
-                                final report = workReport.elementAt(index);
+                                final report = reports.elementAt(index);
 
                                 return WorkDetailGridItem(report: report);
                               },

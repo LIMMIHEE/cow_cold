@@ -1,6 +1,9 @@
+import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
+import 'package:cow_cold/view/widget/common/shared_guide_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,9 +17,16 @@ class HomeMainGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userId = PrefsUtils.getString(PrefsUtils.userId);
+    final isMyWork = work.createUserId == userId;
+
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/work_detail', arguments: work);
+        if (!isMyWork) {
+          Get.find<ReportController>().loadInviteWorkReport(work);
+        }
+        Get.toNamed('/work_detail',
+            arguments: {"work": work, "isMyWork": isMyWork});
       },
       child: Wrap(
         children: [
@@ -59,6 +69,10 @@ class HomeMainGridItem extends StatelessWidget {
                     ),
                   ),
                 )),
+          ),
+          SharedGuideText(
+            isMyReport: isMyWork,
+            text: '초대 작품',
           )
         ],
       ),

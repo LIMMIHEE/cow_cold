@@ -14,6 +14,13 @@ class ReportProvider {
         .get();
   }
 
+  Future<QuerySnapshot> getInviteWorkReports(String workServerId) async {
+    return await firebaseStore.store
+        .collection("report")
+        .where("workServerId", isEqualTo: workServerId)
+        .get();
+  }
+
   Future<Report> createReport(
       String workServerId, String title, String content) async {
     final newReport = firebaseStore.store.collection("report").doc();

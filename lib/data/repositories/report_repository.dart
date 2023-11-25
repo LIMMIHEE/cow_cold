@@ -11,6 +11,10 @@ class ReportRepository {
     return await reportProvider.getUserReports();
   }
 
+  Future<QuerySnapshot> getInviteWorkReports(String workServerId) async {
+    return await reportProvider.getInviteWorkReports(workServerId);
+  }
+
   Future<Report> createReport(
       String workServerId, String title, String content) async {
     return await reportProvider.createReport(workServerId, title, content);

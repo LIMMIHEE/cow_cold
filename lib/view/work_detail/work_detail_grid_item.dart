@@ -1,5 +1,7 @@
+import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/view/widget/common/shared_guide_text.dart';
 import 'package:cow_cold/view/work_detail/work_detail_report_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,9 +17,13 @@ class WorkDetailGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userId = PrefsUtils.getString(PrefsUtils.userId);
+    final isMyReport = report.createUserId == userId;
+
     return GestureDetector(
       onTap: () {
-        Get.bottomSheet(WorkDetailReportBottomSheet(report: report),
+        Get.bottomSheet(
+            WorkDetailReportBottomSheet(report: report, isMyReport: isMyReport),
             backgroundColor: DesignSystem.colors.white);
       },
       child: Container(
@@ -58,6 +64,11 @@ class WorkDetailGridItem extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   overflow: TextOverflow.ellipsis,
                 ))),
+            SharedGuideText(
+              isMyReport: isMyReport,
+              text: '공유 유저 감상',
+              topPadding: true,
+            )
           ],
         ),
       ),

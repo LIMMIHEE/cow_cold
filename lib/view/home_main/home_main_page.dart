@@ -52,7 +52,7 @@ class HomeMainPage extends GetView<WorkController> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        childAspectRatio: 2 / 3,
+                        childAspectRatio: 1.9 / 3,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 21),
                       itemCount: workList.length,
