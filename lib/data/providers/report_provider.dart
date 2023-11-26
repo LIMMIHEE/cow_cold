@@ -21,21 +21,22 @@ class ReportProvider {
         .get();
   }
 
-  Future<Report> createReport(
-      String workServerId, String title, String content) async {
+  Future<Report> createReport(Report report) async {
     final newReport = firebaseStore.store.collection("report").doc();
 
-    final report = Report(
-        serverId: newReport.id,
-        workServerId: workServerId,
-        createUserId: PrefsUtils.getString(PrefsUtils.userId),
-        createUserName: PrefsUtils.getString(PrefsUtils.nickName),
-        updateDate: DateTime.now().toString(),
-        title: title,
-        content: content);
+    report.serverId = newReport.id;
+    report.createUserId = PrefsUtils.getString(PrefsUtils.userId);
+    report.createUserName = PrefsUtils.getString(PrefsUtils.nickName);
 
     await newReport.set(report.toJson());
     return report;
+  }
+
+  Future<void> updateReport(Report report) async {
+    await firebaseStore.store
+        .collection("report")
+        .doc(report.serverId)
+        .update(report.toJson());
   }
 
   Future<void> deleteReport(String serverId) async {

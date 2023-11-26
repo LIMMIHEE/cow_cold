@@ -156,7 +156,10 @@ class WorkDetailScreen extends GetView<ReportController> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.toNamed('/write_report', arguments: work);
+                                Get.toNamed(
+                                  '/write_report',
+                                  arguments: {"initialWorkId": work.serverId},
+                                );
                               },
                               child: Container(
                                 width: double.infinity,

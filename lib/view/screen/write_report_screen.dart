@@ -18,10 +18,10 @@ class WriteReportScreen extends StatelessWidget {
         init: WriteReportController(),
         builder: (controller) {
           return ScaffoldBody(
-              appBar: basicAppBar('감상추가', actions: [
+              appBar: basicAppBar('감상 작성', actions: [
                 TextButton(
                     onPressed: () {
-                      controller.createReport();
+                      controller.createOrUpdateReport();
                     },
                     child: Text(
                       '완료',

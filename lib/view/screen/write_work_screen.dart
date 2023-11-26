@@ -20,7 +20,7 @@ class WriteWorkScreen extends StatelessWidget {
         init: WriteWorkController(),
         builder: (controller) {
           return ScaffoldBody(
-              appBar: basicAppBar('작품추가', actions: [
+              appBar: basicAppBar('작품 작성', actions: [
                 TextButton(
                     onPressed: () {
                       controller.createWork();

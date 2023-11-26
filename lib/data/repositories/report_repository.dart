@@ -15,9 +15,12 @@ class ReportRepository {
     return await reportProvider.getInviteWorkReports(workServerId);
   }
 
-  Future<Report> createReport(
-      String workServerId, String title, String content) async {
-    return await reportProvider.createReport(workServerId, title, content);
+  Future<Report> createReport(Report report) async {
+    return await reportProvider.createReport(report);
+  }
+
+  Future<void> updateReport(Report report) async {
+    return await reportProvider.updateReport(report);
   }
 
   Future<void> deleteReport(String serverId) async {

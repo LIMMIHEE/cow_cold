@@ -78,8 +78,11 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                               '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
                               onCancel: () {
                                 Get.back();
-                                Get.find<ReportController>()
-                                    .deleteReport(report);
+                                Future.delayed(const Duration(milliseconds: 50),
+                                    () {
+                                  Get.find<ReportController>()
+                                      .deleteReport(report);
+                                });
                               },
                             );
                           },
@@ -92,7 +95,16 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                           text: '감상 수정',
                           backgroundColor: DesignSystem.colors.appSecondary,
                           textColor: DesignSystem.colors.white,
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                            Get.toNamed(
+                              '/write_report',
+                              arguments: {
+                                "initialWorkId": report.workServerId,
+                                "initialReport": report
+                              },
+                            );
+                          },
                           paddingVisible: false)),
                 ],
               ),

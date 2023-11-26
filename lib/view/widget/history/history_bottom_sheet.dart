@@ -67,7 +67,8 @@ class HistoryBottomSheet extends StatelessWidget {
                     .first;
                 Get.back();
                 Future.delayed(const Duration(milliseconds: 50), () {
-                  Get.toNamed('/work_detail', arguments: work);
+                  Get.toNamed('/work_detail',
+                      arguments: {"work": work, "isMyWork": true});
                 });
               },
             ),

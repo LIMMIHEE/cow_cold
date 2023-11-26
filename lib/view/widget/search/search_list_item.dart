@@ -1,3 +1,4 @@
+import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/search/search_flag_clip.dart';
@@ -13,9 +14,13 @@ class SearchListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userId = PrefsUtils.getString(PrefsUtils.userId);
+    final isMyWork = work.createUserId == userId;
+
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/work_detail', arguments: work);
+        Get.toNamed('/work_detail',
+            arguments: {"work": work, "isMyWork": isMyWork});
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12),

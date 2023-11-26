@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
@@ -11,6 +12,7 @@ class ReportController extends GetxController {
 
   RxList<Report> myReports = <Report>[].obs;
   RxMap<String, List<Report>> inviteWorkReports = <String, List<Report>>{}.obs;
+  final String userId = PrefsUtils.getString(PrefsUtils.userId);
 
   @override
   Future<void> onInit() async {
@@ -56,11 +58,18 @@ class ReportController extends GetxController {
   }
 
   List<Report>? getInviteWorkReport(String workId) {
-    return inviteWorkReports[workId];
+    return inviteWorkReports[workId]
+        ?.where((report) => report.createUserId != userId)
+        .toList();
   }
 
   void addReport(Report newReport) {
     myReports.add(newReport);
+  }
+
+  Future<void> updateReport(Report report) async {
+    myReports[myReports
+        .indexWhere((element) => element.serverId == report.serverId)] = report;
   }
 
   Future<void> deleteReport(Report report) async {
