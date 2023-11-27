@@ -23,7 +23,7 @@ class WriteWorkScreen extends StatelessWidget {
               appBar: basicAppBar('작품 작성', actions: [
                 TextButton(
                     onPressed: () {
-                      controller.createWork();
+                      controller.createOrUpdateWork();
                     },
                     child: Text(
                       '완료',

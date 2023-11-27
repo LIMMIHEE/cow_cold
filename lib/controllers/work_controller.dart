@@ -42,6 +42,11 @@ class WorkController extends GetxController {
     workList.add(newWork);
   }
 
+  void updateWork(Work work) {
+    workList[workList
+        .indexWhere((element) => element.serverId == work.serverId)] = work;
+  }
+
   void removeWork(Work deleteWork) async {
     try {
       await workRepository.deleteWork(

@@ -4,11 +4,11 @@ import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
-import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/work_detail/board_top_layout.dart';
 import 'package:cow_cold/view/work_detail/work_detail_function_item.dart';
 import 'package:cow_cold/view/work_detail/work_detail_grid_item.dart';
+import 'package:cow_cold/view/work_detail/work_detail_info_column.dart';
 import 'package:cow_cold/view/work_detail/work_detail_invited_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -34,7 +34,11 @@ class WorkDetailScreen extends GetView<ReportController> {
                                   WorkDetailFunctionItem(
                                     icon: Icons.edit,
                                     text: '수정',
-                                    onTap: () {},
+                                    onTap: () {
+                                      Get.back();
+                                      Get.toNamed('/write_work',
+                                          arguments: work);
+                                    },
                                   ),
                                   WorkDetailFunctionItem(
                                     icon: Icons.share,
@@ -86,49 +90,7 @@ class WorkDetailScreen extends GetView<ReportController> {
               const SizedBox(
                 height: 30,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      work.title,
-                      style: DesignSystem.typography.heading3(),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ClipPath(
-                        clipper: CustomFlagClip(),
-                        child: Container(
-                          constraints: const BoxConstraints(maxWidth: 110),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 6, horizontal: 16),
-                          decoration: BoxDecoration(
-                              color: DesignSystem.colors.appSecondary,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: Text(
-                              work.category,
-                              textAlign: TextAlign.center,
-                              style: DesignSystem.typography.body(TextStyle(
-                                  color: DesignSystem.colors.white,
-                                  fontWeight: FontWeight.w400)),
-                            ),
-                          ),
-                        )),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25),
-                child: Text(
-                  work.description,
-                  style: DesignSystem.typography.body(TextStyle(
-                      color: DesignSystem.colors.gray700,
-                      fontWeight: FontWeight.w400)),
-                ),
-              ),
+              WorkDetailInfoColumn(workServerId: work.serverId),
               const BoardTopLayout(),
               Expanded(child: Obx(() {
                 final reports = [

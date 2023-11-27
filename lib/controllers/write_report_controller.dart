@@ -21,10 +21,10 @@ class WriteReportController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initializeDropDownList();
+    initData();
   }
 
-  void initializeDropDownList() {
+  void initData() {
     String initialWorkId = '';
     if (Get.arguments != null) {
       initialWorkId = Get.arguments['initialWorkId'] as String;

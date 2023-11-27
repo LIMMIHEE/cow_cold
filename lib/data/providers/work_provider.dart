@@ -37,25 +37,25 @@ class WorkProvider {
         .get();
   }
 
-  Future<Work> createWork(
-      String title, String category, String description) async {
+  Future<Work> createWork(Work work) async {
     final newWork = firebaseStore.store.collection("work").doc();
     final inviteCode = generateInviteCode(newWork.id);
 
-    final work = Work(
-      serverId: newWork.id,
-      createUserId: PrefsUtils.getString(PrefsUtils.userId),
-      createUserName: PrefsUtils.getString(PrefsUtils.nickName),
-      updateDate: DateTime.now().toString(),
-      title: title,
-      category: category,
-      description: description,
-      inviteCode: inviteCode,
-    );
+    work.serverId = newWork.id;
+    work.createUserId = PrefsUtils.getString(PrefsUtils.userId);
+    work.createUserName = PrefsUtils.getString(PrefsUtils.nickName);
+    work.inviteCode = inviteCode;
 
     await newWork.set(work.toJson());
     await setInviteCodeWork(newWork.id, inviteCode);
     return work;
+  }
+
+  Future<void> updateWork(Work work) async {
+    await firebaseStore.store
+        .collection("work")
+        .doc(work.serverId)
+        .update(work.toJson());
   }
 
   Future<void> deleteWork(String serverId, String inviteCode) async {

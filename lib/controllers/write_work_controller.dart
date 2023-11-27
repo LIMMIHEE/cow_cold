@@ -19,10 +19,21 @@ class WriteWorkController extends GetxController {
   RxList<String> categoryList = <String>[].obs;
   List<String> customCategory =
       PrefsUtils.getStringList(PrefsUtils.customCategory);
+  Work? initialWork;
 
   @override
   void onInit() {
     super.onInit();
+    initData();
+  }
+
+  void initData() {
+    if (Get.arguments != null) {
+      initialWork = Get.arguments as Work;
+      category.value = initialWork!.category;
+      title.text = initialWork!.title;
+      description.text = initialWork!.description;
+    }
     categoryList.value = ['웹소설', '소설', '시나리오', ...customCategory];
   }
 
@@ -30,16 +41,32 @@ class WriteWorkController extends GetxController {
     category.value = text;
   }
 
-  Future<void> createWork() async {
+  Future<void> createOrUpdateWork() async {
     if (title.text.isEmpty) {
       Get.snackbar('작품명 입력', '작품명을 적어주세요!');
       return;
     }
 
+    Work work = Work(
+      updateDate: DateTime.now().toString(),
+      title: title.text,
+      category: category.value,
+      description: description.text,
+    );
+
     try {
-      Work newWork = await workRepository.createWork(
-          title.text, category.value, description.text);
-      Get.find<WorkController>().addWork(newWork);
+      if (initialWork != null) {
+        work.serverId = initialWork!.serverId;
+        work.createUserId = initialWork!.createUserId;
+        work.createUserName = initialWork!.createUserName;
+        work.inviteCode = initialWork!.inviteCode;
+
+        await workRepository.updateWork(work);
+        Get.find<WorkController>().updateWork(work);
+      } else {
+        Work newWork = await workRepository.createWork(work);
+        Get.find<WorkController>().addWork(newWork);
+      }
       Get.back();
     } catch (error) {
       Get.snackbar('작품 추가 실패', '작품 업로드 중 문제가 발생하였습니다.');

@@ -19,9 +19,12 @@ class WorkRepository {
     return await workProvider.getInviteWork();
   }
 
-  Future<Work> createWork(
-      String title, String category, String description) async {
-    return await workProvider.createWork(title, category, description);
+  Future<Work> createWork(Work work) async {
+    return await workProvider.createWork(work);
+  }
+
+  Future<void> updateWork(Work work) async {
+    return await workProvider.updateWork(work);
   }
 
   Future<void> submitInviteCode(String inviteCode) async {
