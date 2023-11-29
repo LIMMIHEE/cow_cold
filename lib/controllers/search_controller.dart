@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class SearchController extends GetxController {
   final search = TextEditingController();
+  final searchFocus = FocusNode();
   final filterList = ['작품명', '작품설명', '카테고리'];
   late final List<Work> workList;
 
@@ -16,6 +17,13 @@ class SearchController extends GetxController {
   void onInit() {
     super.onInit();
     workList = Get.find<WorkController>().workList;
+    searchFocus.addListener(filter.refresh);
+  }
+
+  @override
+  onClose() {
+    searchFocus.dispose();
+    super.onClose();
   }
 
   void selectFilter(String text) {
@@ -36,5 +44,10 @@ class SearchController extends GetxController {
           return false;
       }
     }).toList();
+  }
+
+  void inputTextFocusField(String text) {
+    search.text = text;
+    update();
   }
 }

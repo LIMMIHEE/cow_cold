@@ -7,15 +7,17 @@ class SpeechTextButton extends StatelessWidget {
   const SpeechTextButton({
     super.key,
     required this.speechComplete,
+    this.rightPosition = 0,
   });
 
   final Function(String) speechComplete;
+  final double rightPosition;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
       bottom: 10,
-      right: 0,
+      right: rightPosition,
       child: FloatingActionButton.extended(
         onPressed: () {
           Get.bottomSheet(

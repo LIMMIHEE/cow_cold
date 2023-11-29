@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField(
-      {super.key, required this.controller, required this.onSubmitted});
+      {super.key,
+      required this.controller,
+      required this.focusNode,
+      required this.onSubmitted});
 
   final TextEditingController controller;
   final Function() onSubmitted;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      focusNode: focusNode,
       onSubmitted: (_) => onSubmitted(),
       style: DesignSystem.typography.body(TextStyle(
           color: DesignSystem.colors.white, fontWeight: FontWeight.w400)),

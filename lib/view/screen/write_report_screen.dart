@@ -73,9 +73,7 @@ class WriteReportScreen extends StatelessWidget {
                     Visibility(
                       visible: controller.contentFocus.hasFocus,
                       child: SpeechTextButton(
-                        speechComplete: (text) {
-                          controller.inputTextFocusField(text);
-                        },
+                        speechComplete: controller.inputTextFocusField,
                       ),
                     )
                   ],
