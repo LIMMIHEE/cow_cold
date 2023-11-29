@@ -29,6 +29,8 @@ dependencies:
   flutter_localization:
   dropdown_textfield:
   flutter_staggered_grid_view:
+  speech_to_text:
+  avatar_glow:
 
 dev_dependencies:
   flutter_test:

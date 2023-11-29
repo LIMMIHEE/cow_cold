@@ -26,4 +26,8 @@ class Utils {
         radius: 16,
         buttonColor: DesignSystem.colors.appPrimary);
   }
+
+  String speechToText() {
+    return '';
+  }
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cow_cold/data/models/user.dart' as user_profile;
 import 'package:cow_cold/common/prefs_utils.dart';
-import 'package:cow_cold/data/providers/user_provider.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';

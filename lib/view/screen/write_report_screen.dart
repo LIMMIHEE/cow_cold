@@ -3,6 +3,7 @@ import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/write_report_controller.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
+import 'package:cow_cold/view/widget/common/speech_text_button.dart';
 import 'package:cow_cold/view/widget/write/description_text_field.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
@@ -38,32 +39,45 @@ class WriteReportScreen extends StatelessWidget {
                 }
               }),
               child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
+                child: Stack(
                   children: [
-                    DropDownTextField(
-                      controller: controller.workName,
-                      textFieldDecoration:
-                          const InputDecoration(labelText: '작품 선택'),
-                      searchDecoration:
-                          const InputDecoration(hintText: "검색할 작품명을 입력해 주세요"),
-                      clearOption: true,
-                      searchKeyboardType: TextInputType.text,
-                      enableSearch: true,
-                      dropDownList: controller.dropDownList,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        DropDownTextField(
+                          controller: controller.workName,
+                          textFieldDecoration:
+                              const InputDecoration(labelText: '작품 선택'),
+                          searchDecoration: const InputDecoration(
+                              hintText: "검색할 작품명을 입력해 주세요"),
+                          clearOption: true,
+                          searchKeyboardType: TextInputType.text,
+                          enableSearch: true,
+                          dropDownList: controller.dropDownList,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 40, bottom: 20),
+                          child: Text(
+                            DateFormat.yMMMd('ko').format(DateTime.now()),
+                            style: DesignSystem.typography.body(),
+                          ),
+                        ),
+                        DescriptionTextField(
+                            controller: controller.content,
+                            focusNode: controller.contentFocus,
+                            hintText: '감상을 남겨주세요.',
+                            maxLength: 1200),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, bottom: 20),
-                      child: Text(
-                        DateFormat.yMMMd('ko').format(DateTime.now()),
-                        style: DesignSystem.typography.body(),
+                    Visibility(
+                      visible: controller.contentFocus.hasFocus,
+                      child: SpeechTextButton(
+                        speechComplete: (text) {
+                          controller.inputTextFocusField(text);
+                        },
                       ),
-                    ),
-                    DescriptionTextField(
-                        controller: controller.content,
-                        hintText: '감상을 남겨주세요.',
-                        maxLength: 1200),
+                    )
                   ],
                 ),
               ));

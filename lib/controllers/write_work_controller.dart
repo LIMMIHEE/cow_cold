@@ -1,30 +1,40 @@
-import 'package:cow_cold/common/prefs_utils.dart';
-import 'package:cow_cold/controllers/work_controller.dart';
-import 'package:cow_cold/data/models/work.dart';
-import 'package:cow_cold/data/providers/work_provider.dart';
-import 'package:cow_cold/data/repositories/work_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../common/prefs_utils.dart';
+import '../controllers/work_controller.dart';
+import '../data/models/work.dart';
+import '../data/providers/work_provider.dart';
 import '../data/repositories/user_repository.dart';
+import '../data/repositories/work_repository.dart';
 
 class WriteWorkController extends GetxController {
-  final WorkRepository workRepository =
+  final WorkRepository _workRepository =
       WorkRepository(workProvider: WorkProvider());
-  final userRepository = UserRepository.userRepository;
+  final UserRepository _userRepository = UserRepository.userRepository;
 
+  final titleFocus = FocusNode();
+  final descriptionFocus = FocusNode();
   final title = TextEditingController();
   final description = TextEditingController();
+
   RxString category = '웹소설'.obs;
   RxList<String> categoryList = <String>[].obs;
+  RxBool speechTextButtonVisible = false.obs;
   List<String> customCategory =
       PrefsUtils.getStringList(PrefsUtils.customCategory);
   Work? initialWork;
 
   @override
   void onInit() {
-    super.onInit();
     initData();
+    super.onInit();
+  }
+
+  @override
+  onClose() {
+    titleFocus.dispose();
+    descriptionFocus.dispose();
+    super.onClose();
   }
 
   void initData() {
@@ -35,6 +45,10 @@ class WriteWorkController extends GetxController {
       description.text = initialWork!.description;
     }
     categoryList.value = ['웹소설', '소설', '시나리오', ...customCategory];
+    titleFocus
+        .addListener(() => speechTextButtonVisible.value = titleFocus.hasFocus);
+    descriptionFocus.addListener(
+        () => speechTextButtonVisible.value = descriptionFocus.hasFocus);
   }
 
   void selectCategory(String text) {
@@ -61,10 +75,10 @@ class WriteWorkController extends GetxController {
         work.createUserName = initialWork!.createUserName;
         work.inviteCode = initialWork!.inviteCode;
 
-        await workRepository.updateWork(work);
+        await _workRepository.updateWork(work);
         Get.find<WorkController>().updateWork(work);
       } else {
-        Work newWork = await workRepository.createWork(work);
+        Work newWork = await _workRepository.createWork(work);
         Get.find<WorkController>().addWork(newWork);
       }
       Get.back();
@@ -84,7 +98,7 @@ class WriteWorkController extends GetxController {
     }
 
     try {
-      await userRepository.addCategory(category);
+      await _userRepository.addCategory(category);
 
       final newCategory = [...categoryList, category];
       PrefsUtils.setStringList(
@@ -98,5 +112,14 @@ class WriteWorkController extends GetxController {
     } catch (error) {
       Get.snackbar('카테고리 추가 실패', '카테고리 업로드 중 문제가 발생하였습니다.');
     }
+  }
+
+  void inputTextFocusField(String text) {
+    if (titleFocus.hasFocus) {
+      title.text = text;
+    } else if (descriptionFocus.hasFocus) {
+      description.text = text;
+    }
+    update();
   }
 }

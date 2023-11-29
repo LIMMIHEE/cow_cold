@@ -8,6 +8,7 @@ class BasicTextField extends StatelessWidget {
     this.controller,
     this.hintText,
     this.inputType,
+    this.focusNode,
     this.maxLength,
     this.minLength,
     this.autoFocus = false,
@@ -18,6 +19,7 @@ class BasicTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? inputType;
   final String? hintText;
+  final FocusNode? focusNode;
   final int? maxLength;
   final int? minLength;
   final bool autoFocus;
@@ -28,6 +30,7 @@ class BasicTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       autofocus: autoFocus,
+      focusNode: focusNode,
       obscureText: isPassword,
       maxLength: maxLength,
       keyboardType: inputType,

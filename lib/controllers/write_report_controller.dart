@@ -13,44 +13,56 @@ class WriteReportController extends GetxController {
       ReportRepository(reportProvider: ReportProvider());
   final SingleValueDropDownController workName =
       SingleValueDropDownController();
+
+  final contentFocus = FocusNode();
   final content = TextEditingController();
-  List<DropDownValueModel> dropDownList = <DropDownValueModel>[].obs;
+  final dropDownList = <DropDownValueModel>[].obs;
 
   Report? initialReport;
 
   @override
   void onInit() {
-    super.onInit();
     initData();
+    super.onInit();
+  }
+
+  @override
+  onClose() {
+    contentFocus.dispose();
+    super.onClose();
   }
 
   void initData() {
-    String initialWorkId = '';
-    if (Get.arguments != null) {
-      initialWorkId = Get.arguments['initialWorkId'] as String;
-      if (Get.arguments['initialReport'] != null) {
-        initialReport = Get.arguments['initialReport'] as Report;
+    final arguments = Get.arguments;
+    if (arguments != null) {
+      final initialWorkId = arguments['initialWorkId'] as String;
+      if (arguments['initialReport'] != null) {
+        initialReport = arguments['initialReport'] as Report;
         content.text = initialReport!.content;
       }
+
+      dropDownList.assignAll(
+        Get.find<WorkController>().workList.map((work) {
+          final dropDown = DropDownValueModel(name: work.title, value: work);
+          if (work.serverId == initialWorkId) {
+            workName.setDropDown(dropDown);
+          }
+          return dropDown;
+        }),
+      );
     }
 
-    dropDownList = Get.find<WorkController>().workList.map((work) {
-      final dropDown = DropDownValueModel(name: work.title, value: work);
-      if (work.serverId == initialWorkId) {
-        workName.setDropDown(dropDown);
-      }
-      return dropDown;
-    }).toList();
+    contentFocus.addListener(update);
   }
 
   Future<void> createOrUpdateReport() async {
     if (workName.dropDownValue == null) {
-      Get.snackbar('작품명 선택', '작품명을 선택해주세요!');
+      showSnackBar('작품명 선택', '작품명을 선택해주세요!');
       return;
     }
 
     if (content.text.isEmpty) {
-      Get.snackbar('감상 작성', '감상란이 비어있습니다!');
+      showSnackBar('감상 작성', '감상란이 비어있습니다!');
       return;
     }
 
@@ -69,26 +81,39 @@ class WriteReportController extends GetxController {
         report.createUserId = initialReport!.createUserId;
         report.createUserName = initialReport!.createUserName;
 
-        await reportRepository.updateReport(report);
-        await Get.find<ReportController>().updateReport(report);
-
-        Get.back();
-        showSnackBar('수정 완료', '성공적으로 감상을 수정했습니다.');
+        await updateExistingReport(report);
       } else {
-        final createdReport = await reportRepository.createReport(report);
-        Get.find<ReportController>().addReport(createdReport);
-
-        Get.back();
-        showSnackBar('감상 추가 완료', '성공적으로 감상을 추가했습니다.');
+        await createNewReport(report);
       }
     } catch (error) {
       showSnackBar('작업 실패', '업로드 중 문제가 발생하였습니다.');
     }
   }
 
+  Future<void> updateExistingReport(Report report) async {
+    await reportRepository.updateReport(report);
+    await Get.find<ReportController>().updateReport(report);
+
+    Get.back();
+    showSnackBar('수정 완료', '성공적으로 감상을 수정했습니다.');
+  }
+
+  Future<void> createNewReport(Report report) async {
+    final createdReport = await reportRepository.createReport(report);
+    Get.find<ReportController>().addReport(createdReport);
+
+    Get.back();
+    showSnackBar('감상 추가 완료', '성공적으로 감상을 추가했습니다.');
+  }
+
   void showSnackBar(String title, String message) {
     Future.delayed(const Duration(milliseconds: 50), () {
       Get.snackbar(title, message);
     });
+  }
+
+  void inputTextFocusField(String text) {
+    content.text = text;
+    update();
   }
 }
