@@ -34,23 +34,24 @@ class WriteReportController extends GetxController {
 
   void initData() {
     final arguments = Get.arguments;
+    String initialWorkId = '';
     if (arguments != null) {
-      final initialWorkId = arguments['initialWorkId'] as String;
+      initialWorkId = arguments['initialWorkId'] as String;
       if (arguments['initialReport'] != null) {
         initialReport = arguments['initialReport'] as Report;
         content.text = initialReport!.content;
       }
-
-      dropDownList.assignAll(
-        Get.find<WorkController>().workList.map((work) {
-          final dropDown = DropDownValueModel(name: work.title, value: work);
-          if (work.serverId == initialWorkId) {
-            workName.setDropDown(dropDown);
-          }
-          return dropDown;
-        }),
-      );
     }
+
+    dropDownList.assignAll(
+      Get.find<WorkController>().workList.map((work) {
+        final dropDown = DropDownValueModel(name: work.title, value: work);
+        if (work.serverId == initialWorkId) {
+          workName.setDropDown(dropDown);
+        }
+        return dropDown;
+      }),
+    );
 
     contentFocus.addListener(update);
   }

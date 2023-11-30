@@ -33,6 +33,8 @@ class WorkController extends GetxController {
       workList
         ..sort((b, a) => a.updateDate.compareTo(b.updateDate))
         ..addAll(getWorks);
+      workList.removeWhere(
+          (a) => a != getWorks.firstWhere((b) => b.serverId == a.serverId));
     } catch (error) {
       Get.snackbar('불러오기 실패', '데이터를 불러오는 도중 문제가 발생하였습니다.');
     }
