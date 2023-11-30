@@ -28,7 +28,7 @@ class WritePopMenuItem extends StatelessWidget {
           ]),
       child: Text(
         text,
-        style: DesignSystem.typography.title2(TextStyle(
+        style: DesignSystem.typography.title3(TextStyle(
           color: DesignSystem.colors.white,
           fontWeight: FontWeight.w600,
         )),

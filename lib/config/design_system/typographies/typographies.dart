@@ -51,19 +51,9 @@ class Typographies {
   TextStyle heading3([TextStyle? textStyle]) {
     return _typography(
       textStyle: textStyle ?? DesignSystem.textStyle.bold,
-      fontSize: 20.0,
-      height: 1.40,
-      debugLabel: 'heading3',
-      validations: [FontWeight.w600, FontWeight.w700],
-    );
-  }
-
-  TextStyle heading4([TextStyle? textStyle]) {
-    return _typography(
-      textStyle: textStyle ?? DesignSystem.textStyle.bold,
       fontSize: 18.0,
       height: 1.40,
-      debugLabel: 'heading4',
+      debugLabel: 'heading3',
       validations: [FontWeight.w600, FontWeight.w700],
     );
   }
@@ -101,7 +91,7 @@ class Typographies {
   TextStyle body([TextStyle? textStyle]) {
     return _typography(
       textStyle: textStyle ?? DesignSystem.textStyle.medium,
-      fontSize: 16.0,
+      fontSize: 14.0,
       height: 1.60,
       debugLabel: 'body',
       validations: [
@@ -116,7 +106,7 @@ class Typographies {
   TextStyle body2([TextStyle? textStyle]) {
     return _typography(
       textStyle: textStyle ?? DesignSystem.textStyle.medium,
-      fontSize: 14.0,
+      fontSize: 13.0,
       height: 1.60,
       debugLabel: 'body',
       validations: [FontWeight.w400, FontWeight.w500],

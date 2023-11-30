@@ -49,7 +49,7 @@ class HistoryGridItem extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 12,
                       ),
                       Container(
                         decoration: BoxDecoration(

@@ -88,7 +88,7 @@ class WriteWorkScreen extends StatelessWidget {
                                 child: Icon(
                                   Icons.add,
                                   color: DesignSystem.colors.textPrimary,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               )
                             ],
@@ -98,7 +98,8 @@ class WriteWorkScreen extends StatelessWidget {
                           ),
                           Container(
                             constraints: const BoxConstraints(minHeight: 180),
-                            padding: const EdgeInsets.all(18),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 12),
                             decoration: ShapeDecoration(
                               color: DesignSystem.colors.appPrimary100,
                               shape: RoundedRectangleBorder(

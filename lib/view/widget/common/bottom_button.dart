@@ -28,7 +28,7 @@ class BottomButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            minimumSize: const Size(0, 60),
+            minimumSize: const Size(0, 50),
             elevation: 0,
           ),
           onPressed: () => onTap(),

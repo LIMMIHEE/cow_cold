@@ -44,7 +44,7 @@ class ChipItem extends StatelessWidget {
           ? DesignSystem.colors.white
           : backgroundColor ?? Colors.transparent,
       elevation: 0,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
     );
   }
 }

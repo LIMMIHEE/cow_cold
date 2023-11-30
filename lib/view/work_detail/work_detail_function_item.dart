@@ -29,6 +29,7 @@ class WorkDetailFunctionItem extends StatelessWidget {
             Icon(
               icon,
               color: color,
+              size: 18,
             ),
             const SizedBox(
               width: 18,

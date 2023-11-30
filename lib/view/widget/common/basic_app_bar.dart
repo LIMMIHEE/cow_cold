@@ -19,7 +19,7 @@ PreferredSizeWidget basicAppBar(String title,
         icon: Icon(
           Icons.arrow_back_ios_new_rounded,
           color: DesignSystem.colors.textPrimary,
-          size: 20,
+          size: 18,
         )),
   );
 }

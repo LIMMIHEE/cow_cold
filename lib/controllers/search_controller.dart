@@ -31,6 +31,9 @@ class SearchController extends GetxController {
   }
 
   void searchWork() {
+    if (search.text.isEmpty) {
+      return;
+    }
     isSearchStart = true;
     resultList.value = workList.where((work) {
       switch (filter.value) {
