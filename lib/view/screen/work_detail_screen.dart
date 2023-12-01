@@ -1,9 +1,9 @@
-import 'package:cow_cold/common/utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
+import 'package:cow_cold/view/widget/common/common_dialog.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/work_detail/board_top_layout.dart';
 import 'package:cow_cold/view/work_detail/work_detail_function_item.dart';
@@ -58,15 +58,16 @@ class WorkDetailScreen extends GetView<ReportController> {
                                     isDeleteField: true,
                                     onTap: () {
                                       Get.back();
-                                      Utils.utils.defaultDialog(
-                                        '작품 삭제하기',
-                                        '작품을 삭제하시겠습니까?\n감상 내역들이 함께 사라집니다.',
-                                        onCancel: () {
+                                      Get.dialog(CommonDialog(
+                                        title: '작품 삭제하기',
+                                        subText:
+                                            '작품을 삭제하시겠습니까?\n감상 내역들이 함께 사라집니다.',
+                                        confirmAction: () {
                                           Get.back();
                                           Get.find<WorkController>()
                                               .removeWork(work);
                                         },
-                                      );
+                                      ));
                                     },
                                   ),
                                   const SizedBox(

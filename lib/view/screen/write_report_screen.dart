@@ -1,7 +1,7 @@
-import 'package:cow_cold/common/utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/write_report_controller.dart';
 import 'package:cow_cold/view/widget/common/basic_app_bar.dart';
+import 'package:cow_cold/view/widget/common/common_dialog.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/common/speech_text_button.dart';
 import 'package:cow_cold/view/widget/write/description_text_field.dart';
@@ -30,10 +30,14 @@ class WriteReportScreen extends StatelessWidget {
                     ))
               ], onTap: () {
                 if (controller.content.text.isNotEmpty) {
-                  Utils.utils.defaultDialog(
-                    '나가기',
-                    '화면을 나가시겠습니까?\n작성중인 내용은 사라집니다.',
-                  );
+                  Get.dialog(CommonDialog(
+                    title: '나가기',
+                    subText: '화면을 나가시겠습니까?\n작성중인 내용은 사라집니다.',
+                    confirmAction: () {
+                      Get.back();
+                      Get.back();
+                    },
+                  ));
                 } else {
                   Get.back();
                 }

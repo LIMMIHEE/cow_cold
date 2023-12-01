@@ -10,7 +10,7 @@ class AuthenticationRepository {
   static AuthenticationRepository get instance => AuthenticationRepository();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  get auth => _auth;
+  FirebaseAuth get auth => _auth;
 
   Future<UserCredential?> createUserWithEmailAndPassword(
       String email, String password) async {

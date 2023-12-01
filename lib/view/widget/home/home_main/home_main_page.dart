@@ -2,7 +2,7 @@ import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/view/widget/common/app_logo.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
-import 'package:cow_cold/view/home_main/home_main_grid_item.dart';
+import 'package:cow_cold/view/widget/home/home_main/home_main_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

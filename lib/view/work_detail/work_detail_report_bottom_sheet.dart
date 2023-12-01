@@ -1,9 +1,9 @@
 import 'package:cow_cold/common/prefs_utils.dart';
-import 'package:cow_cold/common/utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
+import 'package:cow_cold/view/widget/common/common_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -73,10 +73,10 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                             }
 
                             Get.back();
-                            Utils.utils.defaultDialog(
-                              '감상 삭제하기',
-                              '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
-                              onCancel: () {
+                            Get.dialog(CommonDialog(
+                              title: '감상 삭제하기',
+                              subText: '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
+                              confirmAction: () {
                                 Get.back();
                                 Future.delayed(const Duration(milliseconds: 50),
                                     () {
@@ -84,7 +84,7 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                                       .deleteReport(report);
                                 });
                               },
-                            );
+                            ));
                           },
                           paddingVisible: false)),
                   const SizedBox(
