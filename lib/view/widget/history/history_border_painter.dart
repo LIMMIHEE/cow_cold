@@ -1,3 +1,4 @@
+import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class HistoryBorderPainter extends CustomPainter {
@@ -24,7 +25,7 @@ class HistoryBorderPainter extends CustomPainter {
     Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1
-      ..color = Colors.black.withOpacity(0.5);
+      ..color = DesignSystem.colors.gray700.withOpacity(0.5);
     canvas.drawPath(path, paint);
   }
 

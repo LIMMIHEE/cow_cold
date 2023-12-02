@@ -24,7 +24,7 @@ class WorkDetailGridItem extends StatelessWidget {
       onTap: () {
         Get.bottomSheet(
             WorkDetailReportBottomSheet(report: report, isMyReport: isMyReport),
-            backgroundColor: DesignSystem.colors.white);
+            backgroundColor: DesignSystem.colors.background);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
@@ -60,10 +60,10 @@ class WorkDetailGridItem extends StatelessWidget {
             ),
             Text(report.content,
                 maxLines: 7,
-                style: DesignSystem.typography.body(const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  overflow: TextOverflow.ellipsis,
-                ))),
+                style: DesignSystem.typography.body(TextStyle(
+                    fontWeight: FontWeight.w400,
+                    overflow: TextOverflow.ellipsis,
+                    color: DesignSystem.colors.black))),
             SharedGuideText(
               isMyReport: isMyReport,
               text: '공유 유저 감상',

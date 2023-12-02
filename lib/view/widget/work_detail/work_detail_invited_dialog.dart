@@ -15,7 +15,7 @@ class WorkDetailInvitedDialog extends StatelessWidget {
     return Dialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16))),
-      backgroundColor: DesignSystem.colors.white,
+      backgroundColor: DesignSystem.colors.background,
       child: Wrap(
         children: [
           Column(

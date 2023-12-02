@@ -16,7 +16,7 @@ class HistoryGridItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.bottomSheet(HistoryBottomSheet(report: report),
-            backgroundColor: DesignSystem.colors.white);
+            backgroundColor: DesignSystem.colors.background);
       },
       child: Column(
         children: [

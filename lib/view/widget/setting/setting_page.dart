@@ -1,11 +1,15 @@
 import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/config/design_system/app_theme.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/view/widget/common/common_dialog.dart';
 import 'package:cow_cold/view/widget/common/scaffold_body.dart';
 import 'package:cow_cold/view/widget/common/text_field_bottom_sheet.dart';
+import 'package:cow_cold/view/widget/setting/dark_mode_switch.dart';
 import 'package:cow_cold/view/widget/setting/setting_row.dart';
+import 'package:cow_cold/view/widget/setting/setting_row_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +36,11 @@ class SettingPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          SettingRow(
+          const SettingRow(
+            title: '다크모드',
+            widget: DarkModeSwitch(),
+          ),
+          SettingRowButton(
             title: '작품 초대코드 입력',
             iconData: Icons.arrow_forward_ios_rounded,
             onTap: () {
@@ -46,10 +54,10 @@ class SettingPage extends StatelessWidget {
                       Get.find<WorkController>().submitInviteCode(text);
                     },
                   ),
-                  backgroundColor: DesignSystem.colors.white);
+                  backgroundColor: DesignSystem.colors.background);
             },
           ),
-          SettingRow(
+          SettingRowButton(
             title: '로그아웃',
             iconData: Icons.arrow_forward_ios_rounded,
             onTap: () {

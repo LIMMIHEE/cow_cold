@@ -17,9 +17,7 @@ class WorkDetailFunctionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isDeleteField
-        ? DesignSystem.colors.deleteRed
-        : DesignSystem.colors.textPrimary;
+    final color = isDeleteField ? DesignSystem.colors.deleteRed : null;
     return InkWell(
       onTap: () => onTap(),
       child: Padding(

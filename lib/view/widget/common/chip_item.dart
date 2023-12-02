@@ -21,12 +21,13 @@ class ChipItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isSelectText = selectText == text;
     return ChoiceChip(
+      showCheckmark: false,
       label: child ??
           Text(text,
               style: DesignSystem.typography.title3(TextStyle(
                   color: isSelectText || backgroundColor != null
                       ? DesignSystem.colors.white
-                      : DesignSystem.colors.textPrimary,
+                      : null,
                   fontWeight: FontWeight.w500))),
       selected: isSelectText,
       shape: StadiumBorder(
@@ -34,7 +35,7 @@ class ChipItem extends StatelessWidget {
           width: 1,
           color: (backgroundColor != null
                   ? DesignSystem.colors.white
-                  : Colors.black)
+                  : DesignSystem.colors.textPrimary)
               .withOpacity(0.3),
         ),
       ),

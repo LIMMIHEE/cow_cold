@@ -7,7 +7,7 @@ class UserController extends GetxController {
 
   @override
   void onReady() {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       final userId = PrefsUtils.getString(PrefsUtils.email);
       if (userId.isNotEmpty) {
         Get.offAllNamed('/home');
@@ -15,6 +15,7 @@ class UserController extends GetxController {
         Get.offAllNamed('/start');
       }
     });
+    super.onReady();
   }
 
   Future<void> userLogout() async {

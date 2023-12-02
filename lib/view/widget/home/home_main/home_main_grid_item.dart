@@ -36,7 +36,7 @@ class HomeMainGridItem extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 8),
             padding: const EdgeInsets.all(12),
             decoration: ShapeDecoration(
-              color: Colors.white,
+              color: DesignSystem.colors.background,
               shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1, color: DesignSystem.colors.gray700),
                 borderRadius: BorderRadius.circular(12),

@@ -75,11 +75,10 @@ class WorkDetailScreen extends GetView<ReportController> {
                                   ),
                                 ],
                               ),
-                              backgroundColor: DesignSystem.colors.white);
+                              backgroundColor: DesignSystem.colors.background);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.more_vert,
-                          color: DesignSystem.colors.black,
                         ))
                   ]
                 : null),
@@ -142,7 +141,9 @@ class WorkDetailScreen extends GetView<ReportController> {
                                 child: Text(
                                   '감상추가',
                                   textAlign: TextAlign.center,
-                                  style: DesignSystem.typography.body(),
+                                  style: DesignSystem.typography.body(TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: DesignSystem.colors.black)),
                                 ),
                               ),
                             ),

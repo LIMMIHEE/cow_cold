@@ -1,3 +1,4 @@
+import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/app_routes.dart';
 import 'package:cow_cold/config/design_system/app_theme.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: AppThemeData.appThemeData,
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ko', 'KR')],
       onInit: () {
@@ -26,6 +26,8 @@ class MyApp extends StatelessWidget {
           UserController(),
           permanent: true,
         );
+        Get.changeTheme(
+            AppThemeData.appThemeData(PrefsUtils.getBool(PrefsUtils.darkMode)));
       },
     );
   }

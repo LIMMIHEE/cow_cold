@@ -50,16 +50,16 @@ class WriteReportScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         DropDownTextField(
-                          controller: controller.workName,
-                          textFieldDecoration:
-                              const InputDecoration(labelText: '작품 선택'),
-                          searchDecoration: const InputDecoration(
-                              hintText: "검색할 작품명을 입력해 주세요"),
-                          clearOption: true,
-                          searchKeyboardType: TextInputType.text,
-                          enableSearch: true,
-                          dropDownList: controller.dropDownList,
-                        ),
+                            controller: controller.workName,
+                            textFieldDecoration:
+                                const InputDecoration(labelText: '작품 선택'),
+                            searchDecoration: const InputDecoration(
+                                hintText: "검색할 작품명을 입력해 주세요"),
+                            clearOption: true,
+                            searchKeyboardType: TextInputType.text,
+                            enableSearch: true,
+                            dropDownList: controller.dropDownList,
+                            dropdownColor: DesignSystem.colors.background),
                         Padding(
                           padding: const EdgeInsets.only(top: 40, bottom: 20),
                           child: Text(

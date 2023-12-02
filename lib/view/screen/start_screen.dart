@@ -34,7 +34,7 @@ class StartScreen extends StatelessWidget {
             ),
             BottomButton(
               text: '로그인',
-              backgroundColor: DesignSystem.colors.white,
+              backgroundColor: DesignSystem.colors.background,
               textColor: DesignSystem.colors.textPrimary,
               onTap: () {
                 Get.toNamed('/signin');

@@ -1,9 +1,7 @@
-import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:flutter/widgets.dart';
 
-final TextStyle _baseTextStyle = TextStyle(
+const TextStyle _baseTextStyle = TextStyle(
   fontFamily: 'Pretendard',
-  color: DesignSystem.colors.textPrimary,
 );
 
 class TextStyles {

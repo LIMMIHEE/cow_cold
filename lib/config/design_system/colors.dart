@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-abstract class _LightScheme {
+abstract class LightScheme {
   static const Color appPrimary = Color(0xFFBC9F7C);
   static const Color appSecondary = Color(0xFF6C6051);
   static const Color appPrimary100 = Color(0x33BC9F7C);
@@ -20,7 +21,7 @@ abstract class _LightScheme {
   static const Color background = Color(0xFFFFFFFF);
 }
 
-abstract class _DarkScheme {
+abstract class DarkScheme {
   static const Color appPrimary = Color(0xFF6C6051);
   static const Color appPrimary100 = Color(0x1ABC9F7C);
   static const Color appSecondary = Color(0xFFBC9F7C);
@@ -34,8 +35,8 @@ abstract class _DarkScheme {
   static const Color deleteRed = Color(0xFFFA3C3C);
   static const Color shadow = Color(0x0cffffff);
   static const Color divider = Color(0xFFC9C9C9);
-  static const Color background = Color(0xFF18130E);
-  static const Color textPrimary = Color(0xFF121212);
+  static const Color background = Color(0xFF262525);
+  static const Color textPrimary = Color(0xFFFFFFFF);
 }
 
 class Colors {
@@ -48,48 +49,48 @@ class Colors {
   Color get mainColor => const Color(0xFFBC9F7C);
 
   Color get appPrimary100 =>
-      Get.isDarkMode ? _DarkScheme.appPrimary100 : _LightScheme.appPrimary100;
+      Get.isDarkMode ? DarkScheme.appPrimary100 : LightScheme.appPrimary100;
 
   Color get appPrimary =>
-      Get.isDarkMode ? _DarkScheme.appPrimary : _LightScheme.appPrimary;
+      Get.isDarkMode ? DarkScheme.appPrimary : LightScheme.appPrimary;
 
   Color get appSecondary =>
-      Get.isDarkMode ? _DarkScheme.appSecondary : _LightScheme.appSecondary;
+      Get.isDarkMode ? DarkScheme.appSecondary : LightScheme.appSecondary;
 
-  Color get black => Get.isDarkMode ? _DarkScheme.black : _LightScheme.black;
+  Color get black => Get.isDarkMode ? DarkScheme.black : LightScheme.black;
 
-  Color get white => Get.isDarkMode ? _DarkScheme.white : _LightScheme.white;
+  Color get white => Get.isDarkMode ? DarkScheme.white : LightScheme.white;
 
   Color get gray300 =>
-      Get.isDarkMode ? _DarkScheme.gray300 : _LightScheme.gray300;
+      Get.isDarkMode ? DarkScheme.gray300 : LightScheme.gray300;
 
   Color get gray700 =>
-      Get.isDarkMode ? _DarkScheme.gray700 : _LightScheme.gray700;
+      Get.isDarkMode ? DarkScheme.gray700 : LightScheme.gray700;
 
   Color get gray100 =>
-      Get.isDarkMode ? _DarkScheme.gray100 : _LightScheme.gray100;
+      Get.isDarkMode ? DarkScheme.gray100 : LightScheme.gray100;
 
   Color get deleteRed =>
-      Get.isDarkMode ? _DarkScheme.deleteRed : _LightScheme.deleteRed;
+      Get.isDarkMode ? DarkScheme.deleteRed : LightScheme.deleteRed;
 
   // text
   Color get textPrimary =>
-      Get.isDarkMode ? _DarkScheme.textPrimary : _LightScheme.textPrimary;
+      Get.isDarkMode ? DarkScheme.textPrimary : LightScheme.textPrimary;
 
   Color get textSecondary =>
-      Get.isDarkMode ? _DarkScheme.gray500 : _LightScheme.gray500;
+      Get.isDarkMode ? DarkScheme.gray500 : LightScheme.gray500;
 
   // background
   Color get backgroundDisabled =>
-      Get.isDarkMode ? _DarkScheme.gray900 : _LightScheme.gray900;
+      Get.isDarkMode ? DarkScheme.gray900 : LightScheme.gray900;
 
   Color get background =>
-      Get.isDarkMode ? _DarkScheme.background : _LightScheme.background;
+      Get.isDarkMode ? DarkScheme.background : LightScheme.background;
 
   //divider
   Color get divider =>
-      Get.isDarkMode ? _DarkScheme.divider : _LightScheme.divider;
+      Get.isDarkMode ? DarkScheme.divider : LightScheme.divider;
 
   //shadow
-  Color get shadow => Get.isDarkMode ? _DarkScheme.shadow : _LightScheme.shadow;
+  Color get shadow => Get.isDarkMode ? DarkScheme.shadow : LightScheme.shadow;
 }

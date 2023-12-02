@@ -5,35 +5,25 @@ class SettingRow extends StatelessWidget {
   const SettingRow({
     super.key,
     required this.title,
-    required this.iconData,
-    required this.onTap,
+    required this.widget,
   });
 
   final String title;
-  final IconData iconData;
-  final Function() onTap;
+  final Widget widget;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onTap(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
-        child: Row(children: [
-          Expanded(
-            child: Text(
-              title,
-              style: DesignSystem.typography.body2(TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: DesignSystem.colors.textPrimary)),
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+      child: Row(children: [
+        Expanded(
+          child: Text(
+            title,
+            style: DesignSystem.typography.body2(),
           ),
-          Icon(
-            iconData,
-            size: 16,
-          ),
-        ]),
-      ),
+        ),
+        widget
+      ]),
     );
   }
 }

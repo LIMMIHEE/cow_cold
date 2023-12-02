@@ -25,13 +25,13 @@ class SpeechTextButton extends StatelessWidget {
               SpeechTextBottomSheet(
                 speechComplete: speechComplete,
               ),
-              backgroundColor: DesignSystem.colors.white);
+              backgroundColor: DesignSystem.colors.background);
         },
         elevation: 1,
         shape: RoundedRectangleBorder(
             side: BorderSide(width: 2, color: DesignSystem.colors.appSecondary),
             borderRadius: BorderRadius.circular(100)),
-        backgroundColor: DesignSystem.colors.white,
+        backgroundColor: DesignSystem.colors.background,
         label: Text(
           '음성인식으로 입력하기',
           style: DesignSystem.typography.title3(TextStyle(

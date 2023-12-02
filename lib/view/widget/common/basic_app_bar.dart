@@ -16,9 +16,8 @@ PreferredSizeWidget basicAppBar(String title,
         onPressed: () {
           onTap == null ? Get.back() : onTap();
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back_ios_new_rounded,
-          color: DesignSystem.colors.textPrimary,
           size: 18,
         )),
   );

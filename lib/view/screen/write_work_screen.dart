@@ -87,11 +87,10 @@ class WriteWorkScreen extends StatelessWidget {
                                         },
                                       ),
                                       backgroundColor:
-                                          DesignSystem.colors.white);
+                                          DesignSystem.colors.background);
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.add,
-                                  color: DesignSystem.colors.textPrimary,
                                   size: 18,
                                 ),
                               )
