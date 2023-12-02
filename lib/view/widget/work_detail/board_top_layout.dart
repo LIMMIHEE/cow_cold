@@ -1,5 +1,5 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/view/work_detail/work_detail_vertical_divider.dart';
+import 'package:cow_cold/view/widget/work_detail/work_detail_vertical_divider.dart';
 import 'package:flutter/material.dart';
 
 class BoardTopLayout extends StatelessWidget {
