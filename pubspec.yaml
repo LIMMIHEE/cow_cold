@@ -4,7 +4,7 @@ description: 글을 읽고 느낀 감정에 대한 기록을 남기는 앱 프�
 publish_to: 'none'
 
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
