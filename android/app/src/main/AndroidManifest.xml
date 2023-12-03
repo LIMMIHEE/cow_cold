@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 
     <application
-        android:label="cow_cold"
+        android:label="소감기"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
