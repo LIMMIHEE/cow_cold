@@ -14,7 +14,7 @@ class SignInController extends GetxController {
 
     if (result != null) {
       Get.snackbar('로그인 성공!', '소감기에 어서오세요!');
-      AuthenticationRepository.instance.saveUserData(result.user!);
+      await AuthenticationRepository.instance.saveUserData(result.user!);
 
       Get.offAllNamed('/home');
     }

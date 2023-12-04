@@ -21,9 +21,9 @@ class WorkController extends GetxController {
     super.onReady();
 
     try {
-      final works = await workRepository.getWorks();
-      final inviteWorks = await workRepository.getInviteWork();
-      final getWorks = [...works.docs, ...inviteWorks.docs]
+      final QuerySnapshot works = await workRepository.getWorks();
+      final QuerySnapshot? inviteWorks = await workRepository.getInviteWork();
+      final getWorks = [...works.docs, ...(inviteWorks?.docs ?? [])]
           .map(
             (work) => Work.fromJson(jsonDecode(jsonEncode(work.data()))),
           )

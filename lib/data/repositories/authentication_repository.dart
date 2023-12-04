@@ -50,7 +50,7 @@ class AuthenticationRepository {
   Future<void> updateUserName(String nickName) async =>
       await _auth.currentUser?.updateDisplayName(nickName);
 
-  void saveUserData(User user, {String nickName = ''}) {
+  Future<void> saveUserData(User user, {String nickName = ''}) async {
     PrefsUtils.setString(PrefsUtils.email, user.email ?? '');
     PrefsUtils.setString(PrefsUtils.userId, user.uid);
     PrefsUtils.setString(PrefsUtils.nickName, user.displayName ?? nickName);

@@ -51,7 +51,7 @@ class SignUpController extends GetxController {
     ));
 
     await AuthenticationRepository.instance.updateUserName(nickName.text);
-    AuthenticationRepository.instance
+    await AuthenticationRepository.instance
         .saveUserData(userCredential.user!, nickName: nickName.text);
 
     Get.offAllNamed('/home');

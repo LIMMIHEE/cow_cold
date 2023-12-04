@@ -15,7 +15,7 @@ class WorkRepository {
     return await workProvider.getWorkInviteCode(inviteCode);
   }
 
-  Future<QuerySnapshot> getInviteWork() async {
+  Future<QuerySnapshot?> getInviteWork() async {
     return await workProvider.getInviteWork();
   }
 

@@ -21,13 +21,17 @@ class WorkProvider {
         .get();
   }
 
-  Future<QuerySnapshot> getInviteWork() async {
+  Future<QuerySnapshot?> getInviteWork() async {
     final inviteWorks = PrefsUtils.getStringList(PrefsUtils.inviteWork);
 
-    return await firebaseStore.store
-        .collection('work')
-        .where("inviteCode", whereIn: inviteWorks)
-        .get();
+    if (inviteWorks.isNotEmpty) {
+      return await firebaseStore.store
+          .collection('work')
+          .where("inviteCode", whereIn: inviteWorks)
+          .get();
+    } else {
+      return null;
+    }
   }
 
   Future<QuerySnapshot> getWorkInviteCode(String inviteCode) async {
