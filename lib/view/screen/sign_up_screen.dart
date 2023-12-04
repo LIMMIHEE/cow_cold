@@ -15,95 +15,95 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldBody(
         appBar: basicAppBar('회원가입'),
-        child: SafeArea(
-          child: GetX<SignUpController>(
-            init: SignUpController(),
-            builder: (controller) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: SignTextField(
-                                title: '아이디',
-                                textField: BasicTextField(
-                                  hintText: '아이디 입력 (이메일)',
-                                  controller: controller.email,
-                                  onChanged: (_) =>
-                                      controller.isDataEnteredCheck(),
-                                ),
-                              )),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.duplicateEmailCheck();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 22),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 4),
-                                  decoration: ShapeDecoration(
-                                    color: DesignSystem.colors.appPrimary,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(999),
-                                    ),
+        child: GetX<SignUpController>(
+          init: SignUpController(),
+          builder: (controller) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                                child: SignTextField(
+                              title: '아이디',
+                              textField: BasicTextField(
+                                hintText: '아이디 입력 (이메일)',
+                                controller: controller.email,
+                                onChanged: (_) =>
+                                    controller.isDataEnteredCheck(),
+                              ),
+                            )),
+                            GestureDetector(
+                              onTap: () {
+                                controller.duplicateEmailCheck();
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 22),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 4),
+                                decoration: ShapeDecoration(
+                                  color: DesignSystem.colors.appPrimary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(999),
                                   ),
-                                  child: Text('중복확인',
-                                      style: DesignSystem.typography.body2(
-                                          TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  DesignSystem.colors.white))),
                                 ),
-                              )
-                            ],
+                                child: Text('중복확인',
+                                    style: DesignSystem.typography.body2(
+                                        TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            color: DesignSystem.colors.white))),
+                              ),
+                            )
+                          ],
+                        ),
+                        SignTextField(
+                          title: '비밀번호',
+                          textField: BasicTextField(
+                            hintText: '비밀번호 입력',
+                            controller: controller.password,
+                            isPassword: true,
+                            onChanged: (_) => controller.isDataEnteredCheck(),
                           ),
-                          SignTextField(
-                            title: '비밀번호',
-                            textField: BasicTextField(
-                              hintText: '비밀번호 입력',
-                              controller: controller.password,
-                              isPassword: true,
-                              onChanged: (_) => controller.isDataEnteredCheck(),
-                            ),
+                        ),
+                        SignTextField(
+                          title: '별명',
+                          textField: BasicTextField(
+                            hintText: '별명 입력',
+                            controller: controller.nickName,
+                            onChanged: (_) => controller.isDataEnteredCheck(),
                           ),
-                          SignTextField(
-                            title: '별명',
-                            textField: BasicTextField(
-                              hintText: '별명 입력',
-                              controller: controller.nickName,
-                              onChanged: (_) => controller.isDataEnteredCheck(),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  BottomButton(
-                      text: '회원가입',
-                      backgroundColor: controller.isDataEntered.value
-                          ? DesignSystem.colors.appPrimary
-                          : DesignSystem.colors.gray100,
-                      textColor: DesignSystem.colors.white,
-                      onTap: () {
-                        controller.dataFormatCheck();
+                ),
+                BottomButton(
+                    text: '회원가입',
+                    backgroundColor: controller.isDataEntered.value
+                        ? DesignSystem.colors.appPrimary
+                        : DesignSystem.colors.gray100,
+                    textColor: DesignSystem.colors.white,
+                    onTap: () {
+                      controller.dataFormatCheck();
 
-                        if (controller.isDataEntered.value &&
-                            controller.isDataFormatCondition) {
-                          controller.registerUser();
-                        }
-                      })
-                ],
-              );
-            },
-          ),
+                      if (controller.isDataEntered.value &&
+                          controller.isDataFormatCondition) {
+                        controller.registerUser();
+                      }
+                    }),
+                const SizedBox(
+                  height: 12,
+                )
+              ],
+            );
+          },
         ));
   }
 }

@@ -57,7 +57,7 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
           Visibility(
             visible: isMyReport,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
               child: Row(
                 children: [
                   Expanded(

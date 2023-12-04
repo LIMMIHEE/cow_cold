@@ -15,7 +15,7 @@ class ScaffoldBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      body: child,
+      body: SafeArea(child: child),
     );
   }
 }

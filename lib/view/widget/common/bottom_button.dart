@@ -30,6 +30,10 @@ class BottomButton extends StatelessWidget {
             ),
             minimumSize: const Size(0, 50),
             elevation: 0,
+            side: BorderSide(
+              width: 1.5,
+              color: DesignSystem.colors.black.withOpacity(0.1),
+            ),
           ),
           onPressed: () => onTap(),
           child: Text(

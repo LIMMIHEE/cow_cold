@@ -11,37 +11,38 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBody(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/images/app_icon.svg',
-                  fit: BoxFit.cover,
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/images/app_icon.svg',
+                fit: BoxFit.cover,
               ),
             ),
-            BottomButton(
-              text: '회원가입',
-              backgroundColor: DesignSystem.colors.mainColor,
-              textColor: DesignSystem.colors.white,
-              onTap: () {
-                Get.toNamed('/signup');
-              },
-            ),
-            BottomButton(
-              text: '로그인',
-              backgroundColor: DesignSystem.colors.background,
-              textColor: DesignSystem.colors.textPrimary,
-              onTap: () {
-                Get.toNamed('/signin');
-              },
-            ),
-          ],
-        ),
+          ),
+          BottomButton(
+            text: '회원가입',
+            backgroundColor: DesignSystem.colors.mainColor,
+            textColor: DesignSystem.colors.white,
+            onTap: () {
+              Get.toNamed('/signup');
+            },
+          ),
+          BottomButton(
+            text: '로그인',
+            backgroundColor: DesignSystem.colors.background,
+            textColor: DesignSystem.colors.textPrimary,
+            onTap: () {
+              Get.toNamed('/signin');
+            },
+          ),
+          const SizedBox(
+            height: 12,
+          )
+        ],
       ),
     );
   }

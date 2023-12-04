@@ -19,43 +19,45 @@ class TextFieldBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = TextEditingController();
-    return SizedBox(
-      height: 280,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 32),
+    return Wrap(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 24, left: 36),
             child: Text(
               title,
               style: DesignSystem.typography.heading3(),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-            constraints: const BoxConstraints(maxHeight: 60),
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-                color: DesignSystem.colors.appPrimary100,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                    color: DesignSystem.colors.black.withOpacity(0.3))),
-            child: DescriptionTextField(
-              hintText: hintText,
-              maxLength: 10,
-              controller: controller,
-            ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+          constraints: const BoxConstraints(maxHeight: 60),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+              color: DesignSystem.colors.appPrimary100,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                  color: DesignSystem.colors.black.withOpacity(0.3))),
+          child: DescriptionTextField(
+            hintText: hintText,
+            maxLength: 10,
+            controller: controller,
           ),
-          SizedBox(
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: SizedBox(
             width: double.infinity,
             child: BottomButton(
                 text: buttonText,
                 backgroundColor: DesignSystem.colors.appSecondary,
                 textColor: DesignSystem.colors.white,
                 onTap: () => onTap(controller.text)),
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

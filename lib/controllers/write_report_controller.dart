@@ -58,7 +58,7 @@ class WriteReportController extends GetxController {
 
   Future<void> createOrUpdateReport() async {
     if (workName.dropDownValue == null) {
-      showSnackBar('작품명 선택', '작품명을 선택해주세요!');
+      showSnackBar('작품 선택', '작품을 선택해주세요!');
       return;
     }
 

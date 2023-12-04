@@ -12,8 +12,7 @@ class HomeMainPage extends GetView<WorkController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBody(
-        child: SafeArea(
-            child: Column(
+        child: Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 25, right: 18),
@@ -66,6 +65,6 @@ class HomeMainPage extends GetView<WorkController> {
           );
         })
       ],
-    )));
+    ));
   }
 }
