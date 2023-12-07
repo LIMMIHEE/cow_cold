@@ -39,8 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldBody(
-        child: Stack(
+    return Scaffold(
+        body: Stack(
       children: [
         Column(
           children: [
