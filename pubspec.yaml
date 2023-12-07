@@ -19,7 +19,7 @@ dependencies:
   get:
   firebase_core:
   firebase_database:
-  cloud_firestore: 4.13.1
+  cloud_firestore: 4.12.2
   flutter_dotenv:
   shared_preferences:
   firebase_auth:
@@ -31,6 +31,7 @@ dependencies:
   flutter_staggered_grid_view:
   speech_to_text:
   avatar_glow:
+  connectivity_plus:
 
 dev_dependencies:
   flutter_test:
