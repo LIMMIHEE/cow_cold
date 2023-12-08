@@ -1,4 +1,5 @@
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/controllers/user_controller.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/view/widget/search/search_flag_clip.dart';
@@ -14,7 +15,7 @@ class SearchListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userId = PrefsUtils.getString(PrefsUtils.userId);
+    final String userId = Get.find<UserController>().userId;
     final isMyWork = work.createUserId == userId;
 
     return GestureDetector(

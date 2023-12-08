@@ -32,6 +32,7 @@ dependencies:
   speech_to_text:
   avatar_glow:
   connectivity_plus:
+  flutter_secure_storage:
 
 dev_dependencies:
   flutter_test:

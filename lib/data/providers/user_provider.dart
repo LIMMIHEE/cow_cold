@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/models/user.dart';
+import 'package:cow_cold/data/source/local/storage.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
 
 class UserProvider {
@@ -30,15 +31,15 @@ class UserProvider {
       user.inviteWorks = [...user.inviteWorks, inviteCode];
     });
 
-    final inviteWorks = PrefsUtils.getStringList(PrefsUtils.inviteWork);
-    PrefsUtils.setStringList(
-        PrefsUtils.inviteWork, [...inviteWorks, inviteCode]);
+    final List<String> inviteWorks =
+        List<String>.from(await Storage.readList(Storage.inviteWork));
+    Storage.writeList(Storage.inviteWork, [...inviteWorks, inviteCode]);
 
     await _updateUser(user);
   }
 
   Future<User> _getUserAndUpdate(void Function(User) updateLogic) async {
-    final id = PrefsUtils.getString(PrefsUtils.email);
+    final id = await Storage.read(Storage.email) ?? '';
     final userQuery = await getUser(id);
 
     final user = convertUser(userQuery);

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/controllers/user_controller.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/source/local/storage.dart';
 import 'package:cow_cold/data/source/network/firebase_database.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
 import 'package:crypto/crypto.dart';
@@ -12,9 +14,9 @@ import 'package:get/get.dart';
 class WorkProvider {
   final FirebaseDatabase dataBase = FirebaseDataBase.instance.database;
   final FirebaseStore firebaseStore = FirebaseStore.instance;
+  final String userId = Get.find<UserController>().userId;
 
   Future<QuerySnapshot> getWorks() async {
-    final userId = PrefsUtils.getString(PrefsUtils.userId);
     return await firebaseStore.store
         .collection('work')
         .where("createUserId", isEqualTo: userId)
@@ -22,8 +24,8 @@ class WorkProvider {
   }
 
   Future<QuerySnapshot?> getInviteWork() async {
-    final inviteWorks = PrefsUtils.getStringList(PrefsUtils.inviteWork);
-
+    final List<String> inviteWorks =
+        List<String>.from(await Storage.readList(Storage.inviteWork));
     if (inviteWorks.isNotEmpty) {
       return await firebaseStore.store
           .collection('work')
@@ -46,8 +48,8 @@ class WorkProvider {
     final inviteCode = generateInviteCode(newWork.id);
 
     work.serverId = newWork.id;
-    work.createUserId = PrefsUtils.getString(PrefsUtils.userId);
-    work.createUserName = PrefsUtils.getString(PrefsUtils.nickName);
+    work.createUserId = userId;
+    work.createUserName = Prefs.getString(Prefs.nickName);
     work.inviteCode = inviteCode;
 
     await newWork.set(work.toJson());
@@ -68,7 +70,6 @@ class WorkProvider {
   }
 
   Future<void> setInviteCodeWork(String workServerId, String inviteCode) async {
-    final userId = PrefsUtils.getString(PrefsUtils.userId);
     await dataBase.ref('work').child(inviteCode).set({
       'workServerId': workServerId,
       'allowedUsers': [userId],
@@ -79,7 +80,6 @@ class WorkProvider {
     final work = dataBase.ref('work').child(inviteCode);
 
     final DataSnapshot snapshot = await work.child("allowedUsers").get();
-    final userId = PrefsUtils.getString(PrefsUtils.userId);
 
     if (snapshot.exists) {
       final allowedUsers = snapshot.value as List;

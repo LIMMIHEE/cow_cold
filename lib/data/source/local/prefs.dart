@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PrefsUtils {
+class Prefs {
   static late SharedPreferences _prefs;
 
   static Future<SharedPreferences> init() async {
@@ -36,11 +36,8 @@ class PrefsUtils {
 
   static Future<bool> clear() async => await _prefs.clear();
 
-  static const String email = "EMAIL";
-  static const String nickName = "NICKNAME";
-  static const String userId = "USERID";
-  static const String darkMode = "DARKMODE";
-  static const String refreshToken = "REGRESHTOKEN";
-  static const String customCategory = "CUSTOMCATEGORY";
-  static const String inviteWork = "INVITEWORK";
+  static const String nickName = "nick_name";
+  static const String darkMode = "dark_mode";
+  static const String customCategory = "custom_category";
+  static const String appInstallFlag = "app_install_flag";
 }

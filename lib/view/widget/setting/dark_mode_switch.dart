@@ -1,4 +1,4 @@
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/app_theme.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,11 +18,11 @@ class _DarkModeSwitchState extends State<DarkModeSwitch> {
       scale: 0.85,
       child: CupertinoSwitch(
         activeColor: DesignSystem.colors.black,
-        value: PrefsUtils.getBool(PrefsUtils.darkMode),
+        value: Prefs.getBool(Prefs.darkMode),
         onChanged: (isDark) {
           setState(() {
             Get.changeTheme(AppThemeData.appThemeData(isDark));
-            PrefsUtils.setBool(PrefsUtils.darkMode, isDark);
+            Prefs.setBool(Prefs.darkMode, isDark);
           });
         },
       ),

@@ -1,4 +1,4 @@
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/app_routes.dart';
 import 'package:cow_cold/config/design_system/app_theme.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           permanent: true,
         );
         Get.changeTheme(
-            AppThemeData.appThemeData(PrefsUtils.getBool(PrefsUtils.darkMode)));
+            AppThemeData.appThemeData(Prefs.getBool(Prefs.darkMode)));
       },
     );
   }

@@ -1,4 +1,4 @@
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/app_theme.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
@@ -28,7 +28,7 @@ class SettingPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Text(
-            PrefsUtils.getString(PrefsUtils.nickName),
+            Prefs.getString(Prefs.nickName),
             style: DesignSystem.typography.heading1(),
           ),
         ),

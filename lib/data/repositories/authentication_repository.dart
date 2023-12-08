@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/models/user.dart' as user_profile;
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
+import 'package:cow_cold/data/source/local/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -51,20 +53,17 @@ class AuthenticationRepository {
       await _auth.currentUser?.updateDisplayName(nickName);
 
   Future<void> saveUserData(User user, {String nickName = ''}) async {
-    PrefsUtils.setString(PrefsUtils.email, user.email ?? '');
-    PrefsUtils.setString(PrefsUtils.userId, user.uid);
-    PrefsUtils.setString(PrefsUtils.nickName, user.displayName ?? nickName);
-    if ((user.refreshToken ?? '').isNotEmpty) {
-      PrefsUtils.setString(PrefsUtils.refreshToken, user.refreshToken!);
-    }
+    Prefs.setString(Prefs.nickName, user.displayName ?? nickName);
+    Storage.write(Storage.email, user.email ?? '');
+    Storage.write(Storage.uid, user.uid);
+    Get.find<UserController>().setUserId(user.uid);
 
     final userRepository = UserRepository.userRepository;
     userRepository.getUser(user.email ?? '').then((findUser) {
       final convertUser = user_profile.User.fromJson(
           jsonDecode(jsonEncode(findUser.docs.first.data())));
-      PrefsUtils.setStringList(
-          PrefsUtils.customCategory, convertUser.customCategory);
-      PrefsUtils.setStringList(PrefsUtils.inviteWork, convertUser.inviteWorks);
+      Prefs.setStringList(Prefs.customCategory, convertUser.customCategory);
+      Storage.writeList(Storage.inviteWork, convertUser.inviteWorks);
     });
   }
 }

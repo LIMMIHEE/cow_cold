@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../common/prefs_utils.dart';
+import '../data/source/local/prefs.dart';
 import '../controllers/work_controller.dart';
 import '../data/models/work.dart';
 import '../data/providers/work_provider.dart';
@@ -20,8 +20,7 @@ class WriteWorkController extends GetxController {
   RxString category = '웹소설'.obs;
   RxList<String> categoryList = <String>[].obs;
   RxBool speechTextButtonVisible = false.obs;
-  List<String> customCategory =
-      PrefsUtils.getStringList(PrefsUtils.customCategory);
+  List<String> customCategory = Prefs.getStringList(Prefs.customCategory);
   Work? initialWork;
 
   @override
@@ -101,8 +100,7 @@ class WriteWorkController extends GetxController {
       await _userRepository.addCategory(category);
 
       final newCategory = [...categoryList, category];
-      PrefsUtils.setStringList(
-          PrefsUtils.customCategory, [...customCategory, category]);
+      Prefs.setStringList(Prefs.customCategory, [...customCategory, category]);
       categoryList.assignAll(newCategory);
       customCategory = newCategory;
 

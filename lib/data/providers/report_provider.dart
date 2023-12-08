@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/common/prefs_utils.dart';
+import 'package:cow_cold/controllers/user_controller.dart';
+import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
+import 'package:get/get.dart';
 
 class ReportProvider {
   final firebaseStore = FirebaseStore.instance;
+  final String userId = Get.find<UserController>().userId;
 
   Future<QuerySnapshot> getUserReports() async {
-    final userId = PrefsUtils.getString(PrefsUtils.userId);
     return await firebaseStore.store
         .collection("report")
         .where("createUserId", isEqualTo: userId)
@@ -25,8 +27,8 @@ class ReportProvider {
     final newReport = firebaseStore.store.collection("report").doc();
 
     report.serverId = newReport.id;
-    report.createUserId = PrefsUtils.getString(PrefsUtils.userId);
-    report.createUserName = PrefsUtils.getString(PrefsUtils.nickName);
+    report.createUserId = userId;
+    report.createUserName = Prefs.getString(Prefs.nickName);
 
     await newReport.set(report.toJson());
     return report;

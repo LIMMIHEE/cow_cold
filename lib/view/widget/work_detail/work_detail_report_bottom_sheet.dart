@@ -1,4 +1,3 @@
-import 'package:cow_cold/common/prefs_utils.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/report.dart';
@@ -66,12 +65,6 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                           backgroundColor: DesignSystem.colors.deleteRed,
                           textColor: DesignSystem.colors.white,
                           onTap: () {
-                            if (report.createUserId !=
-                                PrefsUtils.getString(PrefsUtils.userId)) {
-                              Get.snackbar('삭제 불가', '내가 작성한 감상이 아닙니다.');
-                              return;
-                            }
-
                             Get.back();
                             Get.dialog(CommonDialog(
                               title: '감상 삭제하기',
