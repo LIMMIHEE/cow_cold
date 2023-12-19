@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
+import 'package:cow_cold/data/models/reactions/reaction.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
+import 'package:cow_cold/view/widget/common/chip_item.dart';
 import 'package:cow_cold/view/widget/common/common_dialog.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class WorkDetailReportBottomSheet extends StatelessWidget {
+class WorkDetailReportBottomSheet extends GetView<ReportController> {
   const WorkDetailReportBottomSheet({
     super.key,
     required this.report,
@@ -55,10 +60,71 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
+            Obx(() {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    children: [
+                      const SizedBox(width: 25),
+                      ...[
+                        Reaction(
+                            emoji: '😃',
+                            reactionUsers: [],
+                            serverId: 'serverId')
+                      ].map((reaction) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: ChipItem(
+                              text:
+                                  '${reaction.emoji}  ${reaction.reactionUsers.length}',
+                              onTap: (_) {},
+                              selectText: '',
+                            ),
+                          )),
+                      Visibility(
+                          visible: !isMyReport,
+                          child: ChipItem(
+                            selectText: 'none',
+                            onTap: (_) {
+                              controller.setEmojiKeyboardShowing(true);
+                            },
+                            child: const Icon(
+                              Icons.add,
+                              size: 18,
+                            ),
+                          )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Visibility(
+                    visible: controller.emojiKeyboardShowing.value,
+                    child: SizedBox(
+                      height: 250,
+                      child: EmojiPicker(
+                        onEmojiSelected: (category, emoji) {
+                          controller.setEmojiKeyboardShowing(false);
+                        },
+                        config: Config(
+                          columns: 7,
+                          emojiSizeMax: 24 * (Platform.isIOS ? 1.3 : 1.0),
+                          bgColor: DesignSystem.colors.appPrimary100,
+                          iconColor: DesignSystem.colors.appPrimary,
+                          indicatorColor: DesignSystem.colors.appSecondary,
+                          iconColorSelected: DesignSystem.colors.appSecondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }),
             Visibility(
               visible: isMyReport,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                 child: Row(
                   children: [
                     Expanded(
@@ -73,8 +139,8 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                                 subText: '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
                                 confirmAction: () {
                                   Get.back();
-                                  Future.delayed(const Duration(milliseconds: 50),
-                                      () {
+                                  Future.delayed(
+                                      const Duration(milliseconds: 50), () {
                                     Get.find<ReportController>()
                                         .deleteReport(report);
                                   });
@@ -104,7 +170,7 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

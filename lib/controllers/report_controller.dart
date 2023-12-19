@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:cow_cold/controllers/user_controller.dart';
-import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
@@ -13,6 +12,7 @@ class ReportController extends GetxController {
 
   RxList<Report> myReports = <Report>[].obs;
   RxMap<String, List<Report>> inviteWorkReports = <String, List<Report>>{}.obs;
+  final emojiKeyboardShowing = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -81,6 +81,10 @@ class ReportController extends GetxController {
 
   Future<void> deleteReports(String workServerId) async {
     await _reportRepository.deleteReports(workServerId);
+  }
+
+  void setEmojiKeyboardShowing(bool showing) {
+    emojiKeyboardShowing.value = showing;
   }
 
   void _showErrorSnackbar() {

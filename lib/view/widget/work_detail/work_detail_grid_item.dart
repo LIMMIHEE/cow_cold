@@ -1,3 +1,4 @@
+import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
@@ -24,8 +25,11 @@ class WorkDetailGridItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.bottomSheet(
-            WorkDetailReportBottomSheet(report: report, isMyReport: isMyReport),
-            backgroundColor: DesignSystem.colors.background);
+                WorkDetailReportBottomSheet(
+                    report: report, isMyReport: isMyReport),
+                backgroundColor: DesignSystem.colors.background)
+            .whenComplete(() =>
+                Get.find<ReportController>().setEmojiKeyboardShowing(false));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
