@@ -12,12 +12,10 @@ _$ReactionImpl _$$ReactionImplFromJson(Map<String, dynamic> json) =>
       reactionUsers: (json['reactionUsers'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      serverId: json['serverId'] as String,
     );
 
 Map<String, dynamic> _$$ReactionImplToJson(_$ReactionImpl instance) =>
     <String, dynamic>{
       'emoji': instance.emoji,
       'reactionUsers': instance.reactionUsers,
-      'serverId': instance.serverId,
     };

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cow_cold/controllers/user_controller.dart';
+import 'package:cow_cold/data/models/reactions/reaction.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/data/models/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
@@ -13,6 +14,7 @@ class ReportController extends GetxController {
   RxList<Report> myReports = <Report>[].obs;
   RxMap<String, List<Report>> inviteWorkReports = <String, List<Report>>{}.obs;
   final emojiKeyboardShowing = false.obs;
+  final String userId = Get.find<UserController>().userId;
 
   @override
   Future<void> onInit() async {
@@ -69,8 +71,15 @@ class ReportController extends GetxController {
     myReports.add(newReport);
   }
 
-  Future<void> updateReport(Report report) async {
+  Future<void> updateMyReport(Report report) async {
     myReports[myReports
+        .indexWhere((element) => element.serverId == report.serverId)] = report;
+  }
+
+  Future<void> updateInviteWorkReport(Report report) async {
+    final reports = inviteWorkReports[report.workServerId];
+
+    reports![reports
         .indexWhere((element) => element.serverId == report.serverId)] = report;
   }
 
@@ -81,6 +90,32 @@ class ReportController extends GetxController {
 
   Future<void> deleteReports(String workServerId) async {
     await _reportRepository.deleteReports(workServerId);
+  }
+
+  Future<void> selectEmoji(Report report, String emoji) async {
+    final findReaction =
+        report.reactions.firstWhereOrNull((element) => element.emoji == emoji);
+    if (findReaction != null && findReaction.reactionUsers.contains(userId)) {
+      final List<String> userList = [...findReaction.reactionUsers];
+      userList.removeWhere((id) => id == userId);
+
+      if (userList.isEmpty) {
+        report.reactions.remove(findReaction);
+      } else {
+        final newReaction = findReaction.copyWith(reactionUsers: userList);
+        report.reactions[report.reactions
+            .indexWhere((element) => element.emoji == emoji)] = newReaction;
+      }
+    } else {
+      report.reactions.add(Reaction(emoji: emoji, reactionUsers: [userId]));
+    }
+
+    await _reportRepository.updateReport(report);
+    if (report.createUserId == userId) {
+      updateMyReport(report);
+    } else {
+      updateInviteWorkReport(report);
+    }
   }
 
   void setEmojiKeyboardShowing(bool showing) {

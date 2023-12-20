@@ -22,7 +22,6 @@ Reaction _$ReactionFromJson(Map<String, dynamic> json) {
 mixin _$Reaction {
   String get emoji => throw _privateConstructorUsedError;
   List<String> get reactionUsers => throw _privateConstructorUsedError;
-  String get serverId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +34,7 @@ abstract class $ReactionCopyWith<$Res> {
   factory $ReactionCopyWith(Reaction value, $Res Function(Reaction) then) =
       _$ReactionCopyWithImpl<$Res, Reaction>;
   @useResult
-  $Res call({String emoji, List<String> reactionUsers, String serverId});
+  $Res call({String emoji, List<String> reactionUsers});
 }
 
 /// @nodoc
@@ -53,7 +52,6 @@ class _$ReactionCopyWithImpl<$Res, $Val extends Reaction>
   $Res call({
     Object? emoji = null,
     Object? reactionUsers = null,
-    Object? serverId = null,
   }) {
     return _then(_value.copyWith(
       emoji: null == emoji
@@ -64,10 +62,6 @@ class _$ReactionCopyWithImpl<$Res, $Val extends Reaction>
           ? _value.reactionUsers
           : reactionUsers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      serverId: null == serverId
-          ? _value.serverId
-          : serverId // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -80,7 +74,7 @@ abstract class _$$ReactionImplCopyWith<$Res>
       __$$ReactionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String emoji, List<String> reactionUsers, String serverId});
+  $Res call({String emoji, List<String> reactionUsers});
 }
 
 /// @nodoc
@@ -96,7 +90,6 @@ class __$$ReactionImplCopyWithImpl<$Res>
   $Res call({
     Object? emoji = null,
     Object? reactionUsers = null,
-    Object? serverId = null,
   }) {
     return _then(_$ReactionImpl(
       emoji: null == emoji
@@ -107,10 +100,6 @@ class __$$ReactionImplCopyWithImpl<$Res>
           ? _value._reactionUsers
           : reactionUsers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      serverId: null == serverId
-          ? _value.serverId
-          : serverId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -119,9 +108,7 @@ class __$$ReactionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReactionImpl implements _Reaction {
   const _$ReactionImpl(
-      {required this.emoji,
-      required final List<String> reactionUsers,
-      required this.serverId})
+      {required this.emoji, required final List<String> reactionUsers})
       : _reactionUsers = reactionUsers;
 
   factory _$ReactionImpl.fromJson(Map<String, dynamic> json) =>
@@ -138,11 +125,8 @@ class _$ReactionImpl implements _Reaction {
   }
 
   @override
-  final String serverId;
-
-  @override
   String toString() {
-    return 'Reaction(emoji: $emoji, reactionUsers: $reactionUsers, serverId: $serverId)';
+    return 'Reaction(emoji: $emoji, reactionUsers: $reactionUsers)';
   }
 
   @override
@@ -152,15 +136,13 @@ class _$ReactionImpl implements _Reaction {
             other is _$ReactionImpl &&
             (identical(other.emoji, emoji) || other.emoji == emoji) &&
             const DeepCollectionEquality()
-                .equals(other._reactionUsers, _reactionUsers) &&
-            (identical(other.serverId, serverId) ||
-                other.serverId == serverId));
+                .equals(other._reactionUsers, _reactionUsers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, emoji,
-      const DeepCollectionEquality().hash(_reactionUsers), serverId);
+  int get hashCode => Object.hash(
+      runtimeType, emoji, const DeepCollectionEquality().hash(_reactionUsers));
 
   @JsonKey(ignore: true)
   @override
@@ -179,8 +161,7 @@ class _$ReactionImpl implements _Reaction {
 abstract class _Reaction implements Reaction {
   const factory _Reaction(
       {required final String emoji,
-      required final List<String> reactionUsers,
-      required final String serverId}) = _$ReactionImpl;
+      required final List<String> reactionUsers}) = _$ReactionImpl;
 
   factory _Reaction.fromJson(Map<String, dynamic> json) =
       _$ReactionImpl.fromJson;
@@ -189,8 +170,6 @@ abstract class _Reaction implements Reaction {
   String get emoji;
   @override
   List<String> get reactionUsers;
-  @override
-  String get serverId;
   @override
   @JsonKey(ignore: true)
   _$$ReactionImplCopyWith<_$ReactionImpl> get copyWith =>

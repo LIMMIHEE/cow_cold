@@ -93,7 +93,7 @@ class WriteReportController extends GetxController {
 
   Future<void> updateExistingReport(Report report) async {
     await reportRepository.updateReport(report);
-    await Get.find<ReportController>().updateReport(report);
+    await Get.find<ReportController>().updateMyReport(report);
 
     Get.back();
     showSnackBar('수정 완료', '성공적으로 감상을 수정했습니다.');

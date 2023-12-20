@@ -46,6 +46,7 @@ class Report {
     data['title'] = title;
     data['content'] = content;
     data['reactions'] = reactions;
+    data['reactions'] = reactions.map((v) => v.toJson()).toList();
     return data;
   }
 }
