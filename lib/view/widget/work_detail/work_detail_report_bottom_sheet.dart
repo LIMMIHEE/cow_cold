@@ -3,6 +3,7 @@ import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/data/models/report.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
 import 'package:cow_cold/view/widget/common/common_dialog.dart';
+import 'package:cow_cold/view/widget/common/report_reaction_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -55,10 +56,12 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
+            ReportReactionChip(report: report, isMyReport: isMyReport),
             Visibility(
               visible: isMyReport,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                 child: Row(
                   children: [
                     Expanded(
@@ -73,8 +76,8 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                                 subText: '정말 감상을 삭제하시겠습니까?\n삭제 후 복구는 불가능합니다.',
                                 confirmAction: () {
                                   Get.back();
-                                  Future.delayed(const Duration(milliseconds: 50),
-                                      () {
+                                  Future.delayed(
+                                      const Duration(milliseconds: 50), () {
                                     Get.find<ReportController>()
                                         .deleteReport(report);
                                   });
@@ -104,7 +107,7 @@ class WorkDetailReportBottomSheet extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

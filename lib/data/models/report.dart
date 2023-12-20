@@ -1,3 +1,5 @@
+import 'package:cow_cold/data/models/reactions/reaction.dart';
+
 class Report {
   String serverId = '';
   String workServerId = '';
@@ -6,6 +8,7 @@ class Report {
   String updateDate = '';
   String title = '';
   String content = '';
+  List<Reaction> reactions = [];
 
   Report(
       {this.serverId = '',
@@ -14,7 +17,8 @@ class Report {
       this.createUserName = '',
       this.updateDate = '',
       this.title = '',
-      this.content = ''});
+      this.content = '',
+      this.reactions = const []});
 
   Report.fromJson(Map<String, dynamic> json) {
     serverId = json['serverId'];
@@ -24,6 +28,12 @@ class Report {
     updateDate = json['updateDate'];
     title = json['title'];
     content = json['content'];
+    reactions = [];
+    if (json['reactions'] != null) {
+      json['reactions'].forEach((v) {
+        reactions.add(Reaction.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +45,8 @@ class Report {
     data['updateDate'] = updateDate;
     data['title'] = title;
     data['content'] = content;
+    data['reactions'] = reactions;
+    data['reactions'] = reactions.map((v) => v.toJson()).toList();
     return data;
   }
 }
