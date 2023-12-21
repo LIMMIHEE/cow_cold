@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/models/reactions/reaction.dart';
-import 'package:cow_cold/data/models/report.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/report/report.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/repositories/report_repository.dart';
 import 'package:get/get.dart';
@@ -93,23 +93,25 @@ class ReportController extends GetxController {
   }
 
   Future<void> selectEmoji(Report report, String emoji) async {
+    final reactions = report.reactions ?? [];
     final findReaction =
-        report.reactions.firstWhereOrNull((element) => element.emoji == emoji);
+        reactions.firstWhereOrNull((element) => element.emoji == emoji);
     if (findReaction != null && findReaction.reactionUsers.contains(userId)) {
       final List<String> userList = [...findReaction.reactionUsers];
       userList.removeWhere((id) => id == userId);
 
       if (userList.isEmpty) {
-        report.reactions.remove(findReaction);
+        reactions.remove(findReaction);
       } else {
         final newReaction = findReaction.copyWith(reactionUsers: userList);
-        report.reactions[report.reactions
-            .indexWhere((element) => element.emoji == emoji)] = newReaction;
+        reactions[reactions.indexWhere((element) => element.emoji == emoji)] =
+            newReaction;
       }
     } else {
-      report.reactions.add(Reaction(emoji: emoji, reactionUsers: [userId]));
+      reactions.add(Reaction(emoji: emoji, reactionUsers: [userId]));
     }
 
+    report = report.copyWith(reactions: reactions);
     await _reportRepository.updateReport(report);
     if (report.createUserId == userId) {
       updateMyReport(report);

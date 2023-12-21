@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cow_cold/controllers/user_controller.dart';
-import 'package:cow_cold/data/models/user.dart' as user_profile;
+import 'package:cow_cold/data/models/user/user.dart' as user_profile;
 import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:cow_cold/data/source/local/storage.dart';

@@ -1,5 +1,5 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:cow_cold/view/widget/history/history_border_painter.dart';
 import 'package:cow_cold/view/widget/history/history_bottom_sheet.dart';
 import 'package:flutter/material.dart';

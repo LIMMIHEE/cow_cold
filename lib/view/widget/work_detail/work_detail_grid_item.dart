@@ -2,7 +2,7 @@ import 'package:cow_cold/controllers/report_controller.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:cow_cold/view/widget/common/shared_guide_text.dart';
 import 'package:cow_cold/view/widget/work_detail/work_detail_report_bottom_sheet.dart';
 import 'package:flutter/material.dart';

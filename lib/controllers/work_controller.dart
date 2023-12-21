@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:cow_cold/data/repositories/work_repository.dart';
