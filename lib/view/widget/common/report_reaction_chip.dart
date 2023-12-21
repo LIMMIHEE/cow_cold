@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -30,7 +30,7 @@ class ReportReactionChip extends GetView<ReportController> {
             Wrap(
               children: [
                 const SizedBox(width: 25),
-                ...report.reactions.map((reaction) => Padding(
+                ...(report.reactions ?? []).map((reaction) => Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: ChipItem(
                         text:

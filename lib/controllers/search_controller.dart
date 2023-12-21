@@ -1,5 +1,5 @@
 import 'package:cow_cold/controllers/work_controller.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
