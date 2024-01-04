@@ -36,6 +36,7 @@ dependencies:
   freezed_annotation:
   json_annotation:
   emoji_picker_flutter:
+  fake_cloud_firestore:
 
 dev_dependencies:
   flutter_test:
