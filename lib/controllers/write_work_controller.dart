@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/source/local/prefs.dart';
 import '../controllers/work_controller.dart';
-import '../data/models/work.dart';
+import '../data/models/work/work.dart';
 import '../data/providers/work_provider.dart';
 import '../data/repositories/user_repository.dart';
 import '../data/repositories/work_repository.dart';
@@ -65,17 +65,22 @@ class WriteWorkController extends GetxController {
       title: title.text,
       category: category.value,
       description: description.text,
+      serverId: '',
+      createUserId: '',
+      createUserName: '',
+      inviteCode: '',
     );
 
     try {
       if (initialWork != null) {
-        work.serverId = initialWork!.serverId;
-        work.createUserId = initialWork!.createUserId;
-        work.createUserName = initialWork!.createUserName;
-        work.inviteCode = initialWork!.inviteCode;
-
-        await _workRepository.updateWork(work);
-        Get.find<WorkController>().updateWork(work);
+        final updateWork = work.copyWith(
+          serverId: initialWork!.serverId,
+          createUserId: initialWork!.createUserId,
+          createUserName: initialWork!.createUserName,
+          inviteCode: initialWork!.inviteCode,
+        );
+        await _workRepository.updateWork(updateWork);
+        Get.find<WorkController>().updateWork(updateWork);
       } else {
         Work newWork = await _workRepository.createWork(work);
         Get.find<WorkController>().addWork(newWork);

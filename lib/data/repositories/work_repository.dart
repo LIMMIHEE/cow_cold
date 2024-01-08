@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/providers/work_provider.dart';
 
 class WorkRepository {

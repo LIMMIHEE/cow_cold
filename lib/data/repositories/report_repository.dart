@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 
 class ReportRepository {

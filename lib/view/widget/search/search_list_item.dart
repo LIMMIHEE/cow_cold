@@ -1,7 +1,7 @@
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/view/widget/search/search_flag_clip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

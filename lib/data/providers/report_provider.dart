@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
 import 'package:get/get.dart';
 
@@ -26,11 +26,13 @@ class ReportProvider {
   Future<Report> createReport(Report report) async {
     final newReport = firebaseStore.store.collection("report").doc();
 
-    report.serverId = newReport.id;
-    report.createUserId = userId;
-    report.createUserName = Prefs.getString(Prefs.nickName);
-
-    await newReport.set(report.toJson());
+    await newReport.set(report
+        .copyWith(
+          serverId: newReport.id,
+          createUserId: userId,
+          createUserName: Prefs.getString(Prefs.nickName),
+        )
+        .toJson());
     return report;
   }
 

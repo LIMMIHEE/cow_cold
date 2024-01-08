@@ -1,7 +1,7 @@
 import 'package:cow_cold/controllers/work_controller.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
-import 'package:cow_cold/data/models/report.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/report/report.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/repositories/report_repository.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
@@ -73,16 +73,19 @@ class WriteReportController extends GetxController {
       title: selectWork.title,
       content: content.text,
       updateDate: DateTime.now().toString(),
+      serverId: '',
+      createUserId: '',
+      createUserName: '',
+      reactions: [],
     );
 
     try {
       if (initialReport != null &&
           selectWork.serverId == initialReport!.workServerId) {
-        report.serverId = initialReport!.serverId;
-        report.createUserId = initialReport!.createUserId;
-        report.createUserName = initialReport!.createUserName;
-
-        await updateExistingReport(report);
+        await updateExistingReport(report.copyWith(
+            serverId: initialReport!.serverId,
+            createUserId: initialReport!.createUserId,
+            createUserName: initialReport!.createUserName));
       } else {
         await createNewReport(report);
       }
@@ -93,7 +96,7 @@ class WriteReportController extends GetxController {
 
   Future<void> updateExistingReport(Report report) async {
     await reportRepository.updateReport(report);
-    await Get.find<ReportController>().updateReport(report);
+    await Get.find<ReportController>().updateMyReport(report);
 
     Get.back();
     showSnackBar('수정 완료', '성공적으로 감상을 수정했습니다.');

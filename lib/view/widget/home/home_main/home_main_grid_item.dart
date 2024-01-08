@@ -2,7 +2,7 @@ import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/report_controller.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/view/widget/common/custom_flag_clip.dart';
 import 'package:cow_cold/view/widget/common/shared_guide_text.dart';
 import 'package:flutter/material.dart';

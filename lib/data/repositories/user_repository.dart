@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/data/models/user.dart';
+import 'package:cow_cold/data/models/user/user.dart';
 import 'package:cow_cold/data/providers/user_provider.dart';
 
 class UserRepository {

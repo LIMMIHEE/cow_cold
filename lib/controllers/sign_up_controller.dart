@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cow_cold/data/models/user.dart' as user;
+import 'package:cow_cold/data/models/user/user.dart' as user;
 import 'package:cow_cold/data/repositories/authentication_repository.dart';
 import 'package:cow_cold/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,6 +48,9 @@ class SignUpController extends GetxController {
     await userRepository.setUser(user.User(
       id: email.text,
       name: nickName.text,
+      serverId: '',
+      customCategory: [],
+      inviteWorks: [],
     ));
 
     await AuthenticationRepository.instance.updateUserName(nickName.text);

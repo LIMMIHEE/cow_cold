@@ -1,6 +1,6 @@
 import 'package:cow_cold/config/design_system/design_system.dart';
 import 'package:cow_cold/controllers/work_controller.dart';
-import 'package:cow_cold/data/models/report.dart';
+import 'package:cow_cold/data/models/report/report.dart';
 import 'package:cow_cold/view/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
