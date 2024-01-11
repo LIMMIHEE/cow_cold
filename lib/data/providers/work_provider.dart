@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cow_cold/controllers/user_controller.dart';
 import 'package:cow_cold/data/source/local/prefs.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/source/local/storage.dart';
 import 'package:cow_cold/data/source/network/firebase_database.dart';
 import 'package:cow_cold/data/source/network/firebase_store.dart';
@@ -47,12 +47,14 @@ class WorkProvider {
     final newWork = firebaseStore.store.collection("work").doc();
     final inviteCode = generateInviteCode(newWork.id);
 
-    work.serverId = newWork.id;
-    work.createUserId = userId;
-    work.createUserName = Prefs.getString(Prefs.nickName);
-    work.inviteCode = inviteCode;
-
-    await newWork.set(work.toJson());
+    await newWork.set(work
+        .copyWith(
+          serverId: newWork.id,
+          createUserId: userId,
+          createUserName: Prefs.getString(Prefs.nickName),
+          inviteCode: inviteCode,
+        )
+        .toJson());
     await setInviteCodeWork(newWork.id, inviteCode);
     return work;
   }

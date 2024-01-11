@@ -1,22 +1,25 @@
 import 'dart:convert';
 import 'package:cow_cold/controllers/user_controller.dart';
-import 'package:cow_cold/data/source/local/prefs.dart';
-import 'package:cow_cold/data/models/report.dart';
-import 'package:cow_cold/data/models/work.dart';
+import 'package:cow_cold/data/models/reactions/reaction.dart';
+import 'package:cow_cold/data/models/report/report.dart';
+import 'package:cow_cold/data/models/work/work.dart';
 import 'package:cow_cold/data/providers/report_provider.dart';
 import 'package:cow_cold/data/repositories/report_repository.dart';
 import 'package:get/get.dart';
 
 class ReportController extends GetxController {
-  final ReportRepository _reportRepository =
-      ReportRepository(reportProvider: ReportProvider());
+  late ReportRepository _reportRepository;
+  late String userId;
 
   RxList<Report> myReports = <Report>[].obs;
   RxMap<String, List<Report>> inviteWorkReports = <String, List<Report>>{}.obs;
+  final emojiKeyboardShowing = false.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    _reportRepository = ReportRepository(reportProvider: ReportProvider());
+    userId = Get.find<UserController>().userId;
     await _loadReports();
   }
 
@@ -69,8 +72,15 @@ class ReportController extends GetxController {
     myReports.add(newReport);
   }
 
-  Future<void> updateReport(Report report) async {
+  Future<void> updateMyReport(Report report) async {
     myReports[myReports
+        .indexWhere((element) => element.serverId == report.serverId)] = report;
+  }
+
+  Future<void> updateInviteWorkReport(Report report) async {
+    final reports = inviteWorkReports[report.workServerId];
+
+    reports![reports
         .indexWhere((element) => element.serverId == report.serverId)] = report;
   }
 
@@ -81,6 +91,38 @@ class ReportController extends GetxController {
 
   Future<void> deleteReports(String workServerId) async {
     await _reportRepository.deleteReports(workServerId);
+  }
+
+  Future<void> selectEmoji(Report report, String emoji) async {
+    final reactions = report.reactions ?? [];
+    final findReaction =
+        reactions.firstWhereOrNull((element) => element.emoji == emoji);
+    if (findReaction != null && findReaction.reactionUsers.contains(userId)) {
+      final List<String> userList = [...findReaction.reactionUsers];
+      userList.removeWhere((id) => id == userId);
+
+      if (userList.isEmpty) {
+        reactions.remove(findReaction);
+      } else {
+        final newReaction = findReaction.copyWith(reactionUsers: userList);
+        reactions[reactions.indexWhere((element) => element.emoji == emoji)] =
+            newReaction;
+      }
+    } else {
+      reactions.add(Reaction(emoji: emoji, reactionUsers: [userId]));
+    }
+
+    report = report.copyWith(reactions: reactions);
+    await _reportRepository.updateReport(report);
+    if (report.createUserId == userId) {
+      updateMyReport(report);
+    } else {
+      updateInviteWorkReport(report);
+    }
+  }
+
+  void setEmojiKeyboardShowing(bool showing) {
+    emojiKeyboardShowing.value = showing;
   }
 
   void _showErrorSnackbar() {

@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      theme: ThemeData.dark(),
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ko', 'KR')],
       onInit: () {
