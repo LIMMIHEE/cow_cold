@@ -8,17 +8,18 @@ import 'package:cow_cold/data/repositories/report_repository.dart';
 import 'package:get/get.dart';
 
 class ReportController extends GetxController {
-  final ReportRepository _reportRepository =
-      ReportRepository(reportProvider: ReportProvider());
+  late ReportRepository _reportRepository;
+  late String userId;
 
   RxList<Report> myReports = <Report>[].obs;
   RxMap<String, List<Report>> inviteWorkReports = <String, List<Report>>{}.obs;
   final emojiKeyboardShowing = false.obs;
-  final String userId = Get.find<UserController>().userId;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    _reportRepository = ReportRepository(reportProvider: ReportProvider());
+    userId = Get.find<UserController>().userId;
     await _loadReports();
   }
 
