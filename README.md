@@ -1,20 +1,45 @@
-# 소감기 [진행중]
+# 소감기 [릴리즈 후 유지보수 중]
 
-웹 소설이나 출판 소설, 게임 스토리 등  글을 읽고 느낀 감상과 감정에 대한 기록하고 공유할 수 있는 앱
-
-<br/>
-<br/>
-
-### 🔗 Link
-
-| [📍 GitHub](https://github.com/LIMMIHEE/cow_cold) | [🎨 Figma](https://www.figma.com/file/TswiJxOSykHrwp4tLzelod/%EC%86%8C%EA%B0%90%EA%B8%B0?type=design&node-id=0%3A1&mode=dev) |
-| --- | --- |
-
-<br/>
-<br/>
+![image](https://github.com/LIMMIHEE/cow_cold/assets/48482259/81a4776c-e768-4f80-b6c1-28867cbb80ff)
 
 
-### **기획의도**
+소감기는 작품과 감상들을 손쉽게 관리하고 공유할 수 있는 독후감 앱입니다.
+<br/><br/><br/><br/>
+
+- #### 👨‍💻 작품 별 감상 
+
+사용자는 손쉽게 자신이 읽은 작품을 추가, 수정, 삭제할 수 있으며, 작품을 읽은 후에는 감상을 기록하고 다른 사용자와 공유할 수 있습니다.
+
+
+- #### 💡 커스텀 카테고리로 작품 구분
+
+사용자는 자신만의 커스텀 카테고리를 생성하여 작품을 효과적으로 구분하고 분류할 수 있습니다.
+
+- #### 👫 작품코드를 통한 감상 공유
+
+작품코드를 통해 작품 및 감상을 손쉽게 공유하고, 본인의 감상에 대한 수정 및 삭제를 제한하여 더욱 안전하게 사용할 수 있습니다.
+
+- #### 📢 음성인식으로 글 쓰기
+
+음성인식을 활용하여 자동으로 텍스트로 변환되어 기록되어 사용자가 편리하게 글을 작성할 수 있습니다. 
+
+- #### 💬 최근 작성한 감상 히스토리 일괄 확인 
+
+사용자는 최근에 작성한 감상 히스토리를 한 눈에 확인하고, 필요한 경우에 다시 찾아볼 수 있습니다.
+
+
+
+<br/><br/><br/><br/>
+
+## 🔗 Link
+
+| [🕹️ PlayStore](https://play.google.com/store/apps/details?id=com.mirimhee.cowCold.cow_cold&pcampaignid=web_share) | [📍 GitHub](https://github.com/LIMMIHEE/cow_cold) | [🎨 Figma](https://www.figma.com/file/TswiJxOSykHrwp4tLzelod/%EC%86%8C%EA%B0%90%EA%B8%B0?type=design&node-id=0%3A1&mode=dev) |
+| ---  | --- | --- |
+
+<br/><br/><br/><br/>
+<br/><br/>
+
+## 기획의도
 
 무언가를 좋아하고 감상하고 난 후의 감정은 언젠가 사라지는 것이 대부분이며, 내용과 당시 느꼈던 생각은 점점 휘발성이 강해져서 잊히는 것이 빠르게 진행되는 편이라는 경험이 있었습니다.
 
@@ -22,11 +47,10 @@
 
 <br/>
 <br/>
-
 <br/>
 <br/>
 
-### 기능
+## 기능
 
 - 작품
     - 감상 중인 / 감상한 작품 추가
@@ -46,11 +70,15 @@
 
 <br/>
 <br/>
+<br/>
 
 
-### **사용스킬**
+## 사용스킬
 
 Flutter, GetX, firebase_database, cloud_firestore, firebase_auth, DesignSystem, SharedPreference
+
+<br/><br/><br/><br/>
+
 
 ## 💡 느낀 점( 배운 점 )
 
