@@ -12,8 +12,12 @@ class MockReportController extends ReportController {
   final fireStore = FakeFirebaseFirestore();
   late TestRepository testRepository;
 
+  bool controllerSetting = false;
+
   @override
   Future<void> onInit() async {
+    controllerSetting = true;
+
     userId = 'testUserId';
     testRepository = TestRepository(firestore: fireStore);
     await loadReports();
@@ -44,4 +48,10 @@ class MockReportController extends ReportController {
         .toList();
     myReports.assignAll(reports);
   }
+
+  @override
+  Future<void> deleteReport(Report report) async {
+    myReports.remove(report);
+  }
+
 }
