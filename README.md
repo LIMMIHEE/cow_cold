@@ -1,4 +1,4 @@
-# 소감기 [릴리즈 후 유지보수 중]
+# 소감기 
 
 ![image](https://github.com/LIMMIHEE/cow_cold/assets/48482259/81a4776c-e768-4f80-b6c1-28867cbb80ff)
 
